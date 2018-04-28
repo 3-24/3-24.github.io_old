@@ -1,5 +1,5 @@
 # 주절주절
-<b><a name="article"></a>주의! 이 페이지의 언급은 가급적이면 [저작권자](https://github.com/3-24)의 허락을 받은 후 해주세요.</b>
+<b><a name="article"></a>주의! 이 페이지의 언급은 가급적이면 [저작권자](https://github.com/3-24)의 [허락](mailto:yschoelife@gmail.com)을 받은 후 해주세요.</b>
 
 ### 180428
 1. Ok, Google
