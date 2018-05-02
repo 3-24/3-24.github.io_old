@@ -7,10 +7,15 @@
     졸업연구를 하면서 Jupyter로 문서를 처음 작성해보았다. 마크다운이 기본 제공되고 그 안에서 mathjax도 되는 건 참 좋은데, 수식 폰트가 싫다.. 비머 폰트보다 더 딱딱하고 대충만든 듯한 느낌이다. TeX 폰트 돌려줘 ㅠㅠ
    
    ([#](https://stackoverflow.com/questions/28909747/how-do-i-configure-mathjax-for-ipython-notebooks))에 방법이 나와 있는 것 같은데, 저 디렉토리가 무엇을 의미하는 지 잘 모르겠다. 조금 jupyter 환경에 익숙해진 후 시도해 봐야겠다.
-2. Sympy
+   
+2. Sympy    
 
     Mathematica를 쓰기 싫어서 다항식을 handle하는 오픈 python 라이브러리를 찾아보았는데 Sympy에 내가 원하는 기능은 대충 다 있는 것 같다. Mathematica를 싫어하는 이유는 다른 환경에서 로드가 불가능하고 오픈 소스가 아니기 때문이다. 컴퓨터로 미방을 풀지 않는 이상 라이브러리를 잘 긁어모으면 왠만한 기능은 오픈 소스 라이브러리로 커버가 될 것 같다.
 
+3. 안개크사!
+    <p align="center"><img src="tistoryjujeol_image/photo_2018-05-02_16-06-21.jpg" width ="60%" /></p>
+    
+    기본적으로 축축하고 비오는 날은 싫어하지만 안개 속을 걸어다닐 때 드는 으스스하고 신비로운 느낌은 좋다. 
 
 ### 180428
 1. Ok, Google
