@@ -1,6 +1,11 @@
 # 주절주절
 <b><a name="article"></a>주의! 이 페이지 링크의 언급은 가급적이면 <a href="https://github.com/3-24" target="_blank">저작권자</a>의 [동의](mailto:yschoelife@gmail.com)를 구한 후 해주세요.</b>
 
+
+### 180503
+당분간 주절주절을 적은 빈도로 업데이트할 것입니다. 시간 낭비를 줄이고 일종의 퀄리티를 좋게 만들기 위한 일종의 선택과 집중입니다.
+
+
 ### 180502
 1. Jupyter Mathjax Font
 
