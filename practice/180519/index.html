@@ -23,13 +23,17 @@
                 }
                 return "";
             }
-            setCookie('myHobby','badminton','3');
-            var hobby = getCookie('myHobby')
-            /* document.getElementById('name').innerHTML=hobby; */
-            alert(hobby)
         </script>
     </head>
     <body>
-        <p id='name'></p>
+        <p id='name'>...</p>
+        <script>
+            alert('1');
+            setCookie('myHobby','bedminton','3');
+            alert('2');
+            var hobby = getCookie('myHobby');
+            document.getElementById('name').innerHTML = hobby;
+            alert('5');
+        </script>
     </body>
 </html>
