@@ -43,6 +43,7 @@
 네가 모르는 이야기 2 key up
 
 ## Korean
+
 |Name |Number|
 | :---: | :---: |
 |가시|69033|
@@ -57,6 +58,7 @@
 
 
 ## English
+
 |Name | Number|
 | :---: | :---: |
 |one day more |79183|
