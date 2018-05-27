@@ -1,7 +1,7 @@
 ## Japanese
 
 |Name | Number |
-| :-: | :-: |
+| :---: | :---: |
 |cagayake! GIRLS|43059|
 |Connecting |44092 |
 |Daydream Dafe |43963|
@@ -44,7 +44,7 @@
 
 ## Korean
 |Name |Number|
-| :--: | :--: |
+| :---: | :---: |
 |가시|69033|
 |너의 모든 순간|48367|
 |다행이다 | 45912|
@@ -58,6 +58,6 @@
 
 ## English
 |Name | Number|
-| :-: | :-: |
+| :---: | :---: |
 |one day more |79183|
 |viva la vida | 60148 |
