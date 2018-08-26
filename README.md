@@ -1,4 +1,5 @@
 ### Welcome!
+<<<<<<< HEAD
 #### This is github page of 3-24.
 
 <script type="text/javascript" async
@@ -6,3 +7,6 @@
 </script>
 
 $how? \int _0 ^\infty f(x) dx$
+=======
+#### This is github page of 3-24.
+>>>>>>> 57aced3e705383f18e209ec0bd8fe88fc7a1ce92
