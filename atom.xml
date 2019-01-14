@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-14T04:40:38.663Z</updated>
+  <updated>2019-01-14T12:32:02.341Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>블로그 구현 로그</title>
+    <link href="http://yoursite.com/2019/01/14/blog-setup/"/>
+    <id>http://yoursite.com/2019/01/14/blog-setup/</id>
+    <published>2019-01-14T09:10:30.000Z</published>
+    <updated>2019-01-14T12:32:02.341Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="1-시작하며"><a href="#1-시작하며" class="headerlink" title="1. 시작하며"></a>1. 시작하며</h2><p>Hexo 기반의 블로그입니다.</p><p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p><p>Mathjax 기능을 지원하기 위해</p><p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p><p>를 참고해서 설정했습니다.</p><p>기본 폰트를 변경하기 위해</p><p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p><p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p><p>를 따라갔습니다. (두 글 다 필요합니다)</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;1-시작하며&quot;&gt;&lt;a href=&quot;#1-시작하며&quot; class=&quot;headerlink&quot; title=&quot;1. 시작하며&quot;&gt;&lt;/a&gt;1. 시작하며&lt;/h2&gt;&lt;p&gt;Hexo 기반의 블로그입니다.&lt;/p&gt;
+&lt;p&gt;현재 적용하고 있는 테마는 &lt;a href=&quot;http
+      
+    
+    </summary>
+    
+      <category term="공지" scheme="http://yoursite.com/categories/%EA%B3%B5%EC%A7%80/"/>
+    
+    
+      <category term="블로그" scheme="http://yoursite.com/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>equation-test</title>
+    <link href="http://yoursite.com/2019/01/14/equation-test/"/>
+    <id>http://yoursite.com/2019/01/14/equation-test/</id>
+    <published>2019-01-14T05:00:00.000Z</published>
+    <updated>2019-01-14T05:42:55.079Z</updated>
+    
+    <content type="html"><![CDATA[<p>수식을 테스트합니다.</p><script type="math/tex; mode=display">\begin{pmatrix} 1 & a_1 & a_1^2 & \cdots & a_1^n \\ 1 & a_2 & a_2^2 & \cdots & a_2^n \\ \vdots  & \vdots& \vdots & \ddots & \vdots \\ 1 & a_m & a_m^2 & \cdots & a_m^n     \end{pmatrix}</script><p>inline $a+b+c$</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;수식을 테스트합니다.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+\begin{pmatrix}
+ 1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\
+ 1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a
+      
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
+    
+  </entry>
   
   <entry>
     <title>Codeforces Round #532 (Div. 2) 후기</title>
@@ -71,33 +124,6 @@
       <category term="Codeforces" scheme="http://yoursite.com/tags/Codeforces/"/>
     
       <category term="문제해결" scheme="http://yoursite.com/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>equation-test</title>
-    <link href="http://yoursite.com/2019/01/10/equation-test/"/>
-    <id>http://yoursite.com/2019/01/10/equation-test/</id>
-    <published>2019-01-10T05:40:14.000Z</published>
-    <updated>2019-01-14T04:52:11.896Z</updated>
-    
-    <content type="html"><![CDATA[<p>수식을 테스트합니다.</p><script type="math/tex; mode=display">\begin{pmatrix} 1 & a_1 & a_1^2 & \cdots & a_1^n \\ 1 & a_2 & a_2^2 & \cdots & a_2^n \\ \vdots  & \vdots& \vdots & \ddots & \vdots \\ 1 & a_m & a_m^2 & \cdots & a_m^n     \end{pmatrix}</script><p>inline $a+b+c$</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;수식을 테스트합니다.&lt;/p&gt;
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;
-\begin{pmatrix}
- 1 &amp; a_1 &amp; a_1^2 &amp; \cdots &amp; a_1^n \\
- 1 &amp; a_2 &amp; a_2^2 &amp; \cdots &amp; a
-      
-    
-    </summary>
-    
-    
-      <category term="hexo" scheme="http://yoursite.com/tags/hexo/"/>
     
   </entry>
   
