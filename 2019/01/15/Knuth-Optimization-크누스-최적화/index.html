@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="푹신푹신 후와후와">
-    <title>블로그 구현 로그 - 푹신푹신 후와후와</title>
+    <title>Knuth Optimization(크누스 최적화) - 푹신푹신 후와후와</title>
     <meta name="author" content="Youngseok Choe">
     
         <meta name="keywords" content="mathematics,computer science,">
@@ -17,19 +17,19 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg"},"articleBody":"20190115Hexo 기반의 블로그입니다.\n현재 적용하고 있는 테마는 Tranquilpeak입니다.\nMathjax 기능을 지원하기 위해\nhttps://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/\n를 참고해서 설정했습니다.\n기본 폰트를 변경하기 위해\nhttp://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/\nhttps://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/\n를 따라갔습니다. (두 글 다 필요합니다)\n프로필과 사이드바를 개인화customization했습니다.\nDisqus로 댓글이 가능하게 만들었습니다.\nPlan\nAlgolia Search 적용하기\n\n","dateCreated":"2019-01-14T18:10:30+09:00","dateModified":"2019-01-15T16:20:22+09:00","datePublished":"2019-01-14T18:10:30+09:00","description":"","headline":"블로그 구현 로그","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2019/01/14/blog-setup/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://yoursite.com/2019/01/14/blog-setup/","keywords":"블로그"}</script>
-    <meta name="description" content="20190115Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 Tranquilpeak입니다. Mathjax 기능을 지원하기 위해 https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/ 를 참고해서 설정했습니다. 기본 폰트를 변경하기 위해 http://blog.lattecom.xyz/2016/05/08/t">
-<meta name="keywords" content="블로그">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg"},"articleBody":"주어진 실수 $a_{i,j}(1 \\le i \\le j \\le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.\n","dateCreated":"2019-01-15T16:21:11+09:00","dateModified":"2019-01-15T16:29:13+09:00","datePublished":"2019-01-15T16:21:11+09:00","description":"","headline":"Knuth Optimization(크누스 최적화)","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/","keywords":"문제해결, 알고리즘"}</script>
+    <meta name="description" content="주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.">
+<meta name="keywords" content="문제해결,알고리즘">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="블로그 구현 로그">
-<meta property="og:url" content="http://yoursite.com/2019/01/14/blog-setup/index.html">
+<meta property="og:title" content="Knuth Optimization(크누스 최적화)">
+<meta property="og:url" content="http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/index.html">
 <meta property="og:site_name" content="푹신푹신 후와후와">
-<meta property="og:description" content="20190115Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 Tranquilpeak입니다. Mathjax 기능을 지원하기 위해 https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/ 를 참고해서 설정했습니다. 기본 폰트를 변경하기 위해 http://blog.lattecom.xyz/2016/05/08/t">
+<meta property="og:description" content="주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.">
 <meta property="og:locale" content="ko">
-<meta property="og:updated_time" content="2019-01-15T07:20:22.529Z">
+<meta property="og:updated_time" content="2019-01-15T07:29:13.231Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="블로그 구현 로그">
-<meta name="twitter:description" content="20190115Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 Tranquilpeak입니다. Mathjax 기능을 지원하기 위해 https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/ 를 참고해서 설정했습니다. 기본 폰트를 변경하기 위해 http://blog.lattecom.xyz/2016/05/08/t">
+<meta name="twitter:title" content="Knuth Optimization(크누스 최적화)">
+<meta name="twitter:description" content="주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.">
     
     
         
@@ -235,20 +235,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            블로그 구현 로그
+            Knuth Optimization(크누스 최적화)
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-01-14T18:10:30+09:00">
+    <time datetime="2019-01-15T16:21:11+09:00">
 	
-		    1월 14, 2019
+		    1월 15, 2019
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/공지사항/">공지사항</a>
+    <a class="category-link" href="/categories/프로그래밍/">프로그래밍</a>, <a class="category-link" href="/categories/프로그래밍/알고리즘/">알고리즘</a>
 
 
     
@@ -260,20 +260,7 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h4 id="20190115"><a href="#20190115" class="headerlink" title="20190115"></a>20190115</h4><p>Hexo 기반의 블로그입니다.</p>
-<p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p>
-<p>Mathjax 기능을 지원하기 위해</p>
-<p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p>
-<p>를 참고해서 설정했습니다.</p>
-<p>기본 폰트를 변경하기 위해</p>
-<p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p>
-<p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p>
-<p>를 따라갔습니다. (두 글 다 필요합니다)</p>
-<p>프로필과 사이드바를 개인화customization했습니다.</p>
-<p>Disqus로 댓글이 가능하게 만들었습니다.</p>
-<h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul>
-<li>Algolia Search 적용하기</li>
-</ul>
+            <p>주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.</p>
 
             
 
@@ -284,7 +271,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/블로그/">블로그</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/문제해결/">문제해결</a> <a class="tag tag--primary tag--small t-link" href="/tags/알고리즘/">알고리즘</a>
 
             </div>
         
@@ -294,8 +281,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/15/Knuth-Optimization-크누스-최적화/" data-tooltip="Knuth Optimization(크누스 최적화)" aria-label="PREVIOUS: Knuth Optimization(크누스 최적화)">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -304,7 +290,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="NEXT: equation-test">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/blog-setup/" data-tooltip="블로그 구현 로그" aria-label="NEXT: 블로그 구현 로그">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -322,7 +308,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -330,7 +316,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -338,7 +324,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -390,8 +376,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/15/Knuth-Optimization-크누스-최적화/" data-tooltip="Knuth Optimization(크누스 최적화)" aria-label="PREVIOUS: Knuth Optimization(크누스 최적화)">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -400,7 +385,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="NEXT: equation-test">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/blog-setup/" data-tooltip="블로그 구현 로그" aria-label="NEXT: 블로그 구현 로그">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -418,7 +403,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Facebook">
+                <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Facebook">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -426,7 +411,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Twitter">
+                <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Twitter">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -434,7 +419,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/14/blog-setup/" title="Share on Google+">
+                <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/" title="Share on Google+">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -468,7 +453,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/14/blog-setup/">
+                    <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -476,7 +461,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/14/blog-setup/">
+                    <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -484,7 +469,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/14/blog-setup/">
+                    <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
@@ -546,9 +531,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'http://yoursite.com/2019/01/14/blog-setup/';
+                 this.page.url = 'http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/';
                  
-                    this.page.identifier = '2019/01/14/blog-setup/';
+                    this.page.identifier = '2019/01/15/Knuth-Optimization-크누스-최적화/';
                  
              };
             (function() {

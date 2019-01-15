@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-14T12:32:02.341Z</updated>
+  <updated>2019-01-15T07:29:13.231Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,25 +17,55 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>블로그 구현 로그</title>
-    <link href="http://yoursite.com/2019/01/14/blog-setup/"/>
-    <id>http://yoursite.com/2019/01/14/blog-setup/</id>
-    <published>2019-01-14T09:10:30.000Z</published>
-    <updated>2019-01-14T12:32:02.341Z</updated>
+    <title>Knuth Optimization(크누스 최적화)</title>
+    <link href="http://yoursite.com/2019/01/15/Knuth-Optimization-%ED%81%AC%EB%88%84%EC%8A%A4-%EC%B5%9C%EC%A0%81%ED%99%94/"/>
+    <id>http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/</id>
+    <published>2019-01-15T07:21:11.000Z</published>
+    <updated>2019-01-15T07:29:13.231Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="1-시작하며"><a href="#1-시작하며" class="headerlink" title="1. 시작하며"></a>1. 시작하며</h2><p>Hexo 기반의 블로그입니다.</p><p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p><p>Mathjax 기능을 지원하기 위해</p><p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p><p>를 참고해서 설정했습니다.</p><p>기본 폰트를 변경하기 위해</p><p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p><p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p><p>를 따라갔습니다. (두 글 다 필요합니다)</p>]]></content>
+    <content type="html"><![CDATA[<p>주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;h2 id=&quot;1-시작하며&quot;&gt;&lt;a href=&quot;#1-시작하며&quot; class=&quot;headerlink&quot; title=&quot;1. 시작하며&quot;&gt;&lt;/a&gt;1. 시작하며&lt;/h2&gt;&lt;p&gt;Hexo 기반의 블로그입니다.&lt;/p&gt;
-&lt;p&gt;현재 적용하고 있는 테마는 &lt;a href=&quot;http
+        &lt;p&gt;주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.&lt;/p&gt;
+
       
     
     </summary>
     
-      <category term="공지" scheme="http://yoursite.com/categories/%EA%B3%B5%EC%A7%80/"/>
+      <category term="프로그래밍" scheme="http://yoursite.com/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/"/>
+    
+      <category term="알고리즘" scheme="http://yoursite.com/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/"/>
+    
+    
+      <category term="문제해결" scheme="http://yoursite.com/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
+    
+      <category term="알고리즘" scheme="http://yoursite.com/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>블로그 구현 로그</title>
+    <link href="http://yoursite.com/2019/01/14/blog-setup/"/>
+    <id>http://yoursite.com/2019/01/14/blog-setup/</id>
+    <published>2019-01-14T09:10:30.000Z</published>
+    <updated>2019-01-15T07:20:22.529Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="20190115"><a href="#20190115" class="headerlink" title="20190115"></a>20190115</h4><p>Hexo 기반의 블로그입니다.</p><p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p><p>Mathjax 기능을 지원하기 위해</p><p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p><p>를 참고해서 설정했습니다.</p><p>기본 폰트를 변경하기 위해</p><p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p><p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p><p>를 따라갔습니다. (두 글 다 필요합니다)</p><p>프로필과 사이드바를 개인화customization했습니다.</p><p>Disqus로 댓글이 가능하게 만들었습니다.</p><h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul><li>Algolia Search 적용하기</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;20190115&quot;&gt;&lt;a href=&quot;#20190115&quot; class=&quot;headerlink&quot; title=&quot;20190115&quot;&gt;&lt;/a&gt;20190115&lt;/h4&gt;&lt;p&gt;Hexo 기반의 블로그입니다.&lt;/p&gt;
+&lt;p&gt;현재 적용하고 있는 테마는 &lt;a href
+      
+    
+    </summary>
+    
+      <category term="공지사항" scheme="http://yoursite.com/categories/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/"/>
     
     
       <category term="블로그" scheme="http://yoursite.com/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/"/>
@@ -47,9 +77,9 @@
     <link href="http://yoursite.com/2019/01/14/equation-test/"/>
     <id>http://yoursite.com/2019/01/14/equation-test/</id>
     <published>2019-01-14T05:00:00.000Z</published>
-    <updated>2019-01-14T05:42:55.079Z</updated>
+    <updated>2019-01-15T07:30:12.964Z</updated>
     
-    <content type="html"><![CDATA[<p>수식을 테스트합니다.</p><script type="math/tex; mode=display">\begin{pmatrix} 1 & a_1 & a_1^2 & \cdots & a_1^n \\ 1 & a_2 & a_2^2 & \cdots & a_2^n \\ \vdots  & \vdots& \vdots & \ddots & \vdots \\ 1 & a_m & a_m^2 & \cdots & a_m^n     \end{pmatrix}</script><p>inline $a+b+c$</p>]]></content>
+    <content type="html"><![CDATA[<p>수식을 테스트합니다.</p><script type="math/tex; mode=display">\begin{pmatrix} 1 & a_1 & a_1^2 & \cdots & a_1^n \\ 1 & a_2 & a_2^2 & \cdots & a_2^n \\ \vdots  & \vdots& \vdots & \ddots & \vdots \\ 1 & a_m & a_m^2 & \cdots & a_m^n     \end{pmatrix}</script><p>inline $a+b+c​$</p>]]></content>
     
     <summary type="html">
     

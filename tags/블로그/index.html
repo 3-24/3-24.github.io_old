@@ -248,7 +248,7 @@
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/공지/">공지</a>
+    <a class="category-link" href="/categories/공지사항/">공지사항</a>
 
 
     
@@ -257,7 +257,7 @@
             </div>
             
                 <div class="postShorten-content">
-                    <h2 id="1-시작하며"><a href="#1-시작하며" class="headerlink" title="1. 시작하며"></a>1. 시작하며</h2><p>Hexo 기반의 블로그입니다.</p>
+                    <h4 id="20190115"><a href="#20190115" class="headerlink" title="20190115"></a>20190115</h4><p>Hexo 기반의 블로그입니다.</p>
 <p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p>
 <p>Mathjax 기능을 지원하기 위해</p>
 <p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p>
@@ -266,6 +266,11 @@
 <p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p>
 <p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p>
 <p>를 따라갔습니다. (두 글 다 필요합니다)</p>
+<p>프로필과 사이드바를 개인화customization했습니다.</p>
+<p>Disqus로 댓글이 가능하게 만들었습니다.</p>
+<h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul>
+<li>Algolia Search 적용하기</li>
+</ul>
 
                     
                         
@@ -354,5 +359,20 @@
 
 
 
-    </body>
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML'></script>
+</body>
 </html>
