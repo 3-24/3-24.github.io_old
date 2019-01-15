@@ -12,10 +12,12 @@
         <meta name="keywords" content="mathematics,computer science,">
     
     
+        <link rel="icon" href="http://yoursite.com/assets/images/favicon.ico">
+    
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"Website","@id":"http://yoursite.com","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/","http://stackoverflow.com/users","https://twitter.com/","https://facebook.com/","https://plus.google.com/","https://www.linkedin.com/profile/","mailto"]},"name":"푹신푹신 후와후와","description":null,"url":"http://yoursite.com","keywords":"mathematics, computer science"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"Website","@id":"http://yoursite.com","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg"},"name":"푹신푹신 후와후와","description":null,"url":"http://yoursite.com","keywords":"mathematics, computer science"}</script>
     <meta name="keywords" content="mathematics,computer science">
 <meta property="og:type" content="blog">
 <meta property="og:title" content="all-tags">
@@ -30,6 +32,8 @@
         
     
     
+        <meta property="og:image" content="http://yoursite.com/assets/images/profile.jpg"/>
+    
     
     
     
@@ -40,6 +44,15 @@
     <link rel="stylesheet" href="/assets/css/tranquilpeak.css">
     <!--STYLES END-->
     
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90928447-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-90928447-2');
+    </script>
+
 
     
 </head>
@@ -49,6 +62,10 @@
             <!-- Define author's picture -->
 
 
+    
+        
+            
+        
     
 
 <header id="header" data-behavior="1">
@@ -61,6 +78,8 @@
             <a class="header-right-picture " href="#about">
         
         
+            <img class="header-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture">
+        
         </a>
     
 </header>
@@ -68,8 +87,23 @@
             <!-- Define author's picture -->
 
 
+
+        
+    
+
 <nav id="sidebar" data-behavior="1">
     <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Youngseok Choe</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>수학과 개발을 오가는 자유로운 학부생입니다.</p>
+</h5>
+                
+            </div>
         
         
             <ul class="sidebar-buttons">
@@ -134,7 +168,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a class="sidebar-button-link " href="https://github.com/" target="_blank" rel="noopener" title="GitHub">
+                        <a class="sidebar-button-link " href="https://github.com/3-24" target="_blank" rel="noopener" title="GitHub">
                     
                         <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">GitHub</span>
@@ -143,7 +177,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a class="sidebar-button-link " href="http://stackoverflow.com/users" target="_blank" rel="noopener" title="Stack Overflow">
+                        <a class="sidebar-button-link " href="http://stackoverflow.com/10366230" target="_blank" rel="noopener" title="Stack Overflow">
                     
                         <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Stack Overflow</span>
@@ -152,16 +186,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a class="sidebar-button-link " href="https://twitter.com/" target="_blank" rel="noopener" title="Twitter">
-                    
-                        <i class="sidebar-button-icon fab fa-twitter" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Twitter</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://facebook.com/" target="_blank" rel="noopener" title="Facebook">
+                        <a class="sidebar-button-link " href="https://www.facebook.com/profile.php?id=100010703071923" target="_blank" rel="noopener" title="Facebook">
                     
                         <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Facebook</span>
@@ -170,25 +195,7 @@
             
                 <li class="sidebar-button">
                     
-                        <a class="sidebar-button-link " href="https://plus.google.com/" target="_blank" rel="noopener" title="Google +">
-                    
-                        <i class="sidebar-button-icon fab fa-google-plus" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">Google +</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="https://www.linkedin.com/profile/" target="_blank" rel="noopener" title="LinkedIn">
-                    
-                        <i class="sidebar-button-icon fab fa-linkedin" aria-hidden="true"></i>
-                        <span class="sidebar-button-desc">LinkedIn</span>
-                    </a>
-            </li>
-            
-                <li class="sidebar-button">
-                    
-                        <a class="sidebar-button-link " href="/mailto" title="Mail">
+                        <a class="sidebar-button-link " href="mailto:yschoelife@gmail.com" target="_blank" rel="noopener" title="Mail">
                     
                         <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
                         <span class="sidebar-button-desc">Mail</span>
@@ -248,17 +255,26 @@
             <div id="Codeforces-list" class="archive box" data-tag="codeforces">
                 <h4 class="archive-title">
                     <a class="link-unstyled" href="/tags/Codeforces">
-                        Codeforces (2)
+                        Codeforces (3)
                     </a>
                 </h4>
                 <ul class="archive-posts">
                     
                         <li class="archive-post">
-                            <a class="archive-post-title" href="/2019/01/14/Codeforces Round #532 (Div. 2) 후기/">
+                            <a class="archive-post-title" href="/2019/01/14/CF-Round-532-DIv-2/">
                                 Codeforces Round #532 (Div. 2) 후기
                             </a>
                             <span class="archive-post-date">
                                  - 1월 14, 2019
+                            </span>
+                        </li>
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2019/01/11/CF-Round-531-DIv-3/">
+                                Codeforces Round #531 (Div. 3) 후기
+                            </a>
+                            <span class="archive-post-date">
+                                 - 1월 11, 2019
                             </span>
                         </li>
                     
@@ -297,17 +313,26 @@
             <div id="문제해결-list" class="archive box" data-tag="문제해결">
                 <h4 class="archive-title">
                     <a class="link-unstyled" href="/tags/문제해결">
-                        문제해결 (2)
+                        문제해결 (3)
                     </a>
                 </h4>
                 <ul class="archive-posts">
                     
                         <li class="archive-post">
-                            <a class="archive-post-title" href="/2019/01/14/Codeforces Round #532 (Div. 2) 후기/">
+                            <a class="archive-post-title" href="/2019/01/14/CF-Round-532-DIv-2/">
                                 Codeforces Round #532 (Div. 2) 후기
                             </a>
                             <span class="archive-post-date">
                                  - 1월 14, 2019
+                            </span>
+                        </li>
+                    
+                        <li class="archive-post">
+                            <a class="archive-post-title" href="/2019/01/11/CF-Round-531-DIv-3/">
+                                Codeforces Round #531 (Div. 3) 후기
+                            </a>
+                            <span class="archive-post-date">
+                                 - 1월 11, 2019
                             </span>
                         </li>
                     
@@ -358,130 +383,38 @@
         
 
 
+    
+        
+    
+
 <div id="about">
     <div id="about-card">
         <div id="about-btn-close">
             <i class="fa fa-times"></i>
         </div>
         
+            <img id="about-card-picture" src="/assets/images/profile.jpg" alt="Author&#39;s picture">
+        
             <h4 id="about-card-name">Youngseok Choe</h4>
         
-            <div id="about-card-bio"><p>author.bio</p>
+            <div id="about-card-bio"><p>수학과 개발을 오가는 자유로운 학부생입니다.</p>
 </div>
         
         
             <div id="about-card-job">
                 <i class="fa fa-briefcase"></i>
                 <br>
-                <p>author.job</p>
+                <p>KAIST 19’ Student</p>
 
             </div>
         
         
-    </div>
-</div>
-
-        
-            <div id="algolia-search-modal" class="modal-container">
-    <div class="modal">
-        <div class="modal-header">
-            <span class="close-button"><i class="fa fa-times"></i></span>
-            <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-                <span class="searchby-algolia-text text-color-light text-small">by</span>
-                <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-            </a>
-            <i class="search-icon fa fa-search"></i>
-            <form id="algolia-search-form">
-                <input type="text" id="algolia-search-input" name="search" class="form-control input--large search-input" placeholder="Search ">
-            </form>
-        </div>
-        <div class="modal-body">
-            <div class="no-result text-color-light text-center">no post found</div>
-            <div class="results">
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://yoursite.com/2019/01/11/Codeforces Round #531 (Div. 3) 후기/">
-                            <h3 class="media-heading">Codeforces Round #531 (Div. 3) 후기</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2019년 1월 11일
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://yoursite.com/2019/01/14/Codeforces Round #532 (Div. 2) 후기/">
-                            <h3 class="media-heading">Codeforces Round #532 (Div. 2) 후기</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2019년 1월 14일
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://yoursite.com/2019/01/14/equation-test/">
-                            <h3 class="media-heading">equation-test</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2019년 1월 14일
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
-                <div class="media">
-                    
-                    <div class="media-body">
-                        <a class="link-unstyled" href="http://yoursite.com/2019/01/14/blog-setup/">
-                            <h3 class="media-heading">블로그 구현 로그</h3>
-                        </a>
-                        <span class="media-meta">
-                            <span class="media-date text-small">
-                                
-                                    2019년 1월 14일
-                                
-                            </span>
-                        </span>
-                        <div class="media-content hide-xs font-merryweather"></div>
-                    </div>
-                    <div style="clear:both;"></div>
-                    <hr>
-                </div>
-                
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                Republic of Korea
             </div>
-        </div>
-        <div class="modal-footer">
-            <p class="results-count text-medium" data-message-zero="no post found" data-message-one="1 post found" data-message-other="{n} posts found">
-                4 posts found
-            </p>
-        </div>
+        
     </div>
 </div>
 
@@ -495,13 +428,6 @@
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
 
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.14.1/moment-with-locales.min.js"></script>
-    <script src="//cdn.jsdelivr.net/algoliasearch/3/algoliasearch.min.js"></script>
-    <script>
-        var algoliaClient = algoliasearch('4CE8KHEBM5', '3d57ff97be5ab78bd93ca6e66e4f77c6');
-        var algoliaIndex = algoliaClient.initIndex('my_blog');
-    </script>
 
 
     <script type="text/x-mathjax-config">
