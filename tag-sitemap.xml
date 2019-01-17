@@ -10,13 +10,6 @@
     </url>
 
     <url>
-        <loc>https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/</loc>
-        <lastmod>2019-01-15T07:20:22.529Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://3-24.github.io/tags/hexo/</loc>
         <lastmod>2019-01-15T07:30:12.964Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -40,6 +33,13 @@
     <url>
         <loc>https://3-24.github.io/tags/Knuth-%EC%B5%9C%EC%A0%81%ED%99%94/</loc>
         <lastmod>2019-01-17T09:17:16.988Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/</loc>
+        <lastmod>2019-01-17T10:20:07.627Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>

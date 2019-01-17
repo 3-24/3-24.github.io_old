@@ -8,6 +8,14 @@
     </url>
 
     <url>
+        <loc>https://3-24.github.io/2019/01/17/blog-setup/</loc>
+        <lastmod>2019-01-17T10:20:07.627Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>https://3-24.github.io/2019/01/15/Knuth-Optimization-%ED%81%AC%EB%88%84%EC%8A%A4-%EC%B5%9C%EC%A0%81%ED%99%94/</loc>
         <lastmod>2019-01-17T09:17:16.988Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -18,14 +26,6 @@
     <url>
         <loc>https://3-24.github.io/2019/01/14/equation-test/</loc>
         <lastmod>2019-01-15T07:30:12.964Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://3-24.github.io/2019/01/14/blog-setup/</loc>
-        <lastmod>2019-01-15T07:20:22.529Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3-24.github.io/"/>
-  <updated>2019-01-17T09:17:16.988Z</updated>
+  <updated>2019-01-17T10:20:07.627Z</updated>
   <id>https://3-24.github.io/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>블로그 구현 로그</title>
+    <link href="https://3-24.github.io/2019/01/17/blog-setup/"/>
+    <id>https://3-24.github.io/2019/01/17/blog-setup/</id>
+    <published>2019-01-17T10:20:30.000Z</published>
+    <updated>2019-01-17T10:20:07.627Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="190115"><a href="#190115" class="headerlink" title="190115"></a>190115</h4><ul><li><p>Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" rel="external nofollow noopener noreferrer" target="_blank">Tranquilpeak</a>입니다.</p></li><li><p>Mathjax 기능을 지원하기 위해 <a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/를" rel="external nofollow noopener noreferrer" target="_blank">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/를</a> 참고해서 설정했습니다.</p></li><li><p>기본 폰트를 변경하기 위해</p><p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" rel="external nofollow noopener noreferrer" target="_blank">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p><p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" rel="external nofollow noopener noreferrer" target="_blank">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p><p>를 따라갔습니다. (두 글 다 필요합니다)</p></li><li><p>프로필과 사이드바를 개인화customization했습니다.</p></li><li><p>Disqus로 댓글이 가능하게 만들었습니다.</p></li></ul><h4 id="190117"><a href="#190117" class="headerlink" title="190117"></a>190117</h4><ul><li><a href="https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/를" rel="external nofollow noopener noreferrer" target="_blank">https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/를</a> 참고하여 검색 최적화 설정을 했습니다. 사이트맵도 자동으로 만들어주고 좋은 기능이 많네요!</li></ul><h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul><li>Algolia Search 적용하기</li></ul>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h4 id=&quot;190115&quot;&gt;&lt;a href=&quot;#190115&quot; class=&quot;headerlink&quot; title=&quot;190115&quot;&gt;&lt;/a&gt;190115&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 &lt;a href=&quot;http
+      
+    
+    </summary>
+    
+      <category term="공지사항" scheme="https://3-24.github.io/categories/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/"/>
+    
+    
+      <category term="블로그" scheme="https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>크누스 최적화(Knuth Optimization)</title>
@@ -46,32 +72,6 @@ d_{i,j} = \begin{case
       <category term="알고리즘" scheme="https://3-24.github.io/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/"/>
     
       <category term="Knuth 최적화" scheme="https://3-24.github.io/tags/Knuth-%EC%B5%9C%EC%A0%81%ED%99%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>블로그 구현 로그</title>
-    <link href="https://3-24.github.io/2019/01/14/blog-setup/"/>
-    <id>https://3-24.github.io/2019/01/14/blog-setup/</id>
-    <published>2019-01-14T09:10:30.000Z</published>
-    <updated>2019-01-15T07:20:22.529Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="20190115"><a href="#20190115" class="headerlink" title="20190115"></a>20190115</h4><p>Hexo 기반의 블로그입니다.</p><p>현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" target="_blank" rel="noopener">Tranquilpeak</a>입니다.</p><p>Mathjax 기능을 지원하기 위해</p><p><a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" target="_blank" rel="noopener">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a></p><p>를 참고해서 설정했습니다.</p><p>기본 폰트를 변경하기 위해</p><p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" target="_blank" rel="noopener">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p><p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" target="_blank" rel="noopener">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p><p>를 따라갔습니다. (두 글 다 필요합니다)</p><p>프로필과 사이드바를 개인화customization했습니다.</p><p>Disqus로 댓글이 가능하게 만들었습니다.</p><h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul><li>Algolia Search 적용하기</li></ul>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h4 id=&quot;20190115&quot;&gt;&lt;a href=&quot;#20190115&quot; class=&quot;headerlink&quot; title=&quot;20190115&quot;&gt;&lt;/a&gt;20190115&lt;/h4&gt;&lt;p&gt;Hexo 기반의 블로그입니다.&lt;/p&gt;
-&lt;p&gt;현재 적용하고 있는 테마는 &lt;a href
-      
-    
-    </summary>
-    
-      <category term="공지사항" scheme="https://3-24.github.io/categories/%EA%B3%B5%EC%A7%80%EC%82%AC%ED%95%AD/"/>
-    
-    
-      <category term="블로그" scheme="https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/"/>
     
   </entry>
   
