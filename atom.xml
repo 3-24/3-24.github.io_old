@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-01-15T07:29:13.231Z</updated>
+  <updated>2019-01-17T09:17:16.988Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,20 +17,21 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Knuth Optimization(크누스 최적화)</title>
+    <title>크누스 최적화(Knuth Optimization)</title>
     <link href="http://yoursite.com/2019/01/15/Knuth-Optimization-%ED%81%AC%EB%88%84%EC%8A%A4-%EC%B5%9C%EC%A0%81%ED%99%94/"/>
     <id>http://yoursite.com/2019/01/15/Knuth-Optimization-크누스-최적화/</id>
     <published>2019-01-15T07:21:11.000Z</published>
-    <updated>2019-01-15T07:29:13.231Z</updated>
+    <updated>2019-01-17T09:17:16.988Z</updated>
     
-    <content type="html"><![CDATA[<p>주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.</p>]]></content>
+    <content type="html"><![CDATA[<p>주어진 실수 $a_{i,j}(1 \le i \le j \le N)​$에 대해 다음과 같이 정의된 $d_{i,j}​$를 고려합니다.</p><script type="math/tex; mode=display">d_{i,j} = \begin{cases} a_{i.j} & \text{if } i=j \\ \min \left\{  k \in \{ i , i+1,  \cdots , j-1 \} : d_{i,k} + d_{k+1,j} + a_{i,j}\right\} & \text{if } i<j\end{cases}</script><p>이는 다음과 같은 $O(N^3)$짜리 동적계획법으로 해결할 수 있습니다.<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">    D[i][i] = a[i][i];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> l=<span class="number">1</span>;i&lt;N;i++)&#123; <span class="comment">// l: length of interval</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N-l;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = i+l;</span><br><span class="line">        D[i][j] = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=i;k&lt;j;k++)&#123;</span><br><span class="line">            D[i][j] = min(D[i][j], D[i][k] + D[k+<span class="number">1</span>][j] + a[i][j])</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> D[<span class="number">1</span>][N];</span><br></pre></td></tr></table></figure></p><p>이것은 특정 조건을 만족하면 더 빠른 시간 안에 풀 수 있습니다. 위 코드에서 k의 검색 범위를 더 좁히는 방법이에요. 이를 위해서 $k_{i,j}​$를 다음과 같이 정의합니다:</p><script type="math/tex; mode=display">k_{i,j} = \begin{cases} i & \text{if } i=j \\ k \in \{i, i+1 , \cdots j-1\} \text{ such that } d_{i,j} = d_{i,k} + d_{k+1,j} + a_{i,j} & \text{if } i < j\end{cases}</script><p>이렇게 $d_{i,j}$를 결정할 때 사용된 $k$값(인덱스)을 계속 저장해나갈 때, $k_{i,j}$가 다음 조건을 만족하면 $\{ d_{i,j}\}$는 $O(N^2)$만에 계산 가능합니다.</p><script type="math/tex; mode=display">k_{i,j-1} \le k_{i,j} \le k_{i+1,j}</script><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;i++)&#123;</span><br><span class="line">    D[i][i] = a[i][i];</span><br><span class="line">    K[i][i] = i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> l=<span class="number">1</span>;i&lt;N;i++)&#123; <span class="comment">// l: length of interval</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N-l;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> j = i+l;</span><br><span class="line">        D[i][j] = INT_MAX;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k=K[i][j<span class="number">-1</span>];k&lt;=min(K[i+<span class="number">1</span>][j],j);k++)&#123;</span><br><span class="line">            v = D[i][k] + D[k+<span class="number">1</span>][j] + a[i][j];</span><br><span class="line">            <span class="keyword">if</span> (v &lt; D[i][j])&#123;</span><br><span class="line">                D[i][j] = v;</span><br><span class="line">                K[i][j] = k;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> D[<span class="number">1</span>][N];</span><br></pre></td></tr></table></figure><p>배열 K를 만들어서 $k_{i,j}$를 저장했고, 세 번째 루프에서 $k$의 검색 범위를 더 줄였습니다. 이 코드가 $O(N^2)$임은 각 $l$에 대해 반복되는 연산이 많아야</p><script type="math/tex; mode=display">\begin{aligned} \sum _{i=1} ^{N-l} (k_{i+1,j} - k_{i,j-1} +1) &= \sum _{i=1} ^{N-l} (k_{i+1,i+l} - k_{i,i+l-1} +1) \\&= \sum _{i=2 } ^{N-l+1} k_{i,i+l-1} - \sum _{i=1 }^{N-l} k_{i,i+l-1} + N-l \\ &= k_{N-l+1,N} - k_{i,l} + N-l < 2N\end{aligned}</script><p>이기 때문이에요. 이런 방식의 동적 계획법 최적화를 Knuth 최적화라고 합니다.</p>]]></content>
     
     <summary type="html">
     
       
       
-        &lt;p&gt;주어진 실수 $a_{i,j}(1 \le i \le j \le N)$에 대해 다음과 같이 정의된 $d_{i,j}$를 고려합니다.&lt;/p&gt;
-
+        &lt;p&gt;주어진 실수 $a_{i,j}(1 \le i \le j \le N)​$에 대해 다음과 같이 정의된 $d_{i,j}​$를 고려합니다.&lt;/p&gt;
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;
+d_{i,j} = \begin{case
       
     
     </summary>
@@ -43,6 +44,8 @@
       <category term="문제해결" scheme="http://yoursite.com/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
     
       <category term="알고리즘" scheme="http://yoursite.com/tags/%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98/"/>
+    
+      <category term="Knuth 최적화" scheme="http://yoursite.com/tags/Knuth-%EC%B5%9C%EC%A0%81%ED%99%94/"/>
     
   </entry>
   
