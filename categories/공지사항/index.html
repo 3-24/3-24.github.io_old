@@ -262,7 +262,7 @@
                     <h4 id="190115"><a href="#190115" class="headerlink" title="190115"></a>190115</h4><ul>
 <li><p>Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" rel="external nofollow noopener noreferrer" target="_blank">Tranquilpeak</a>입니다.</p>
 </li>
-<li><p>Mathjax 기능을 지원하기 위해 <a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/를" rel="external nofollow noopener noreferrer" target="_blank">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/를</a> 참고해서 설정했습니다.</p>
+<li><p>Mathjax 기능을 지원하기 위해 <a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" rel="external nofollow noopener noreferrer" target="_blank">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a> 를 참고해서 설정했습니다.</p>
 </li>
 <li><p>기본 폰트를 변경하기 위해</p>
 <p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" rel="external nofollow noopener noreferrer" target="_blank">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p>
@@ -275,10 +275,11 @@
 </li>
 </ul>
 <h4 id="190117"><a href="#190117" class="headerlink" title="190117"></a>190117</h4><ul>
-<li><a href="https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/를" rel="external nofollow noopener noreferrer" target="_blank">https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/를</a> 참고하여 검색 최적화 설정을 했습니다. 사이트맵도 자동으로 만들어주고 좋은 기능이 많네요!</li>
+<li><a href="https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/" rel="external nofollow noopener noreferrer" target="_blank">https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/</a> 를 참고하여 검색 최적화 설정을 했습니다. 사이트맵도 자동으로 만들어주고 좋은 기능이 많네요!</li>
 </ul>
 <h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul>
-<li>Algolia Search 적용하기</li>
+<li>Algolia Search 적용하기: 블로그 내 검색 기능을 활성화합니다.</li>
+<li>MathJax 가로줄이 잘리는 문제 해결하기: 모바일에서 보면 간혹 긴 수식이 잘리는 문제가 있습니다.</li>
 </ul>
 
                     
@@ -369,20 +370,5 @@
 
 
 
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</body>
+    </body>
 </html>

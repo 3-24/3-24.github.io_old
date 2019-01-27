@@ -39,7 +39,14 @@
 
     <url>
         <loc>https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/</loc>
-        <lastmod>2019-01-17T10:20:07.627Z</lastmod>
+        <lastmod>2019-01-27T10:49:45.029Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/tags/%EA%B0%9C%EB%B0%9C/</loc>
+        <lastmod>2019-01-27T10:49:45.029Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
