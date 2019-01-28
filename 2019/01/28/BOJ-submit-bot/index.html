@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="푹신푹신 후와후와">
-    <title>Tag: 개발 - 푹신푹신 후와후와</title>
+    <title>Python을 이용한 백준 자동 소스 제출 봇 만들기 - 푹신푹신 후와후와</title>
     <meta name="author" content="Youngseok Choe">
     
         <meta name="keywords" content="mathematics,computer science,">
@@ -17,15 +17,28 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{}</script>
-    <meta name="keywords" content="mathematics,computer science">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg"},"articleBody":"Requirements제작 언어는 Python 3를 기본으로 합니다.\nPython을 이용해 웹에 로그인이나 소스를 제출하기 위해서 requests 패키지가, 페이지 내용을 효율적으로 읽기 위한 BeautifulSoup4 패키지가 필요합니다. 해당 패키지가 없다면 (Windows 기준) cmd에서 다음을 입력하여 설치할 수 있습니다.\n12pip install requestspip install bs4\n개발에 이해를 돕는 용도로 웹 디버깅 소프트웨어인 Fiddler를 사용하시면 더 좋습니다. 필수사항은 아닙니다.\n1. 로그인1.1. 로그인하기백준의 로그인은 기본적입니다. Fiddler를 띄우고 백준 로그인을 해보면 다음과 같은 패킷을 확인할 수 있습니다.\n\nlogin_user_id에 아이디가, login_password에 비밀번호를 입력하고 https://acmicpc.net/signin으로 전송하는군요. 이 과정을 Python으로 작성해보면 다음과 같습니다:\n1234567import requestsLOGIN_INFO = &#123;\"login_user_id\":\"(아이디)\", \"login_password\":\"(비밀번호)\"&#125;boj_url = \"https://www.acmicpc.net/\"with requests.Session() as sess:    sess.post(boj_url+'signin',data=LOGIN_INFO)\n웹 세션을 하나 만들어놓고 로그인할 때 정보를 보내는 주소에 로그인 정보를 보내면 됩니다.\n1.2. 로그인 확인하기(optional)로그인이 제대로 되었는지를 확인하려면 로그인하기 전과 후에 생기는 차이를 검사해야겠죠? 백준의 경우 쿠키에 로그인 정보가 기록이 되지 않기 때문에 사이트에서 직접 찾아야 합니다.\n\n개발자도구로 확인해보니 a태그의 username class에 제 아이디가 입력되어있네요. 이걸 활용해봅시다. 크롬 콘솔에서 해당 객체 이름을 검색해보면 로그인한 후는\n1234&gt; var d = $('a.username')[0]undefined&gt; d&lt;a href=\"/user/uncertainty\" class=\"username\"&gt;uncertainty&lt;/a&gt;\n인데 로그인하기 전으로 돌아가서 확인하면\n12&gt; dundefined\n이므로 username은 좋은 로그인 식별자가 된다는 것을 알 수 있습니다! a.username을 Python으로 읽어서 None인지 아닌지만 확인하면 됩니다.\n123456789101112import requestsfrom bs4 import BeautifulSoup as bsLOGIN_INFO = &#123;\"login_user_id\":\"(아이디)\", \"login_password\":\"(비밀번호)\"&#125;boj_url = \"https://www.acmicpc.net/\"with requests.Session() as sess:    sess.post(boj_url+'signin',data=LOGIN_INFO)    soup = bs(sess.get(boj_url).text, 'html.parser')    if soup.find('a', &#123;'class': 'username'&#125;) is None:        print(\"Invalid login info\")        exit(1)\n백준 메인주소인 acmicpc.net을 읽은 후 BeautifulSoup의 html 파서로 이렇게 확인할 수 있습니다. 로그인은 여기까지 하면 되겠군요.\n2. 소스 제출2.1. 테스트 소스 준비하기1234567#include &lt;stdio.h&gt;int main()&#123;  int a,b;  scanf(\"%d %d\",&amp;a,&amp;b);  printf(\"%d\",a-b);&#125;\n↑ 예전에 짜놓은 1001번 C++ (C) 소스\n먼저 자동으로 제출할 소스를 준비해놓아야 합니다. 테스트용으로 저는 1001번 소스를 Python 소스와 같은 경로에 저장해놓았습니다.\n123BOJ_bot└─1001.cpp└─main.py\n그리고 Python main.py에서 문제 번호를 저장하고 소스도 미리 읽어놓는 코드를 로그인 전에 넣어놓습니다.\n1234567891011121314151617import requestsfrom bs4 import BeautifulSoup as bsLOGIN_INFO = &#123;\"login_user_id\":\"(아이디)\", \"login_password\":\"(비밀번호)\"&#125;boj_url = \"https://www.acmicpc.net/\"problem_id = 1001language = \"C++14\"with open(\"1001.cpp\", 'r') as f:    code = f.read()with requests.Session() as sess:    sess.post(boj_url+'signin',data=LOGIN_INFO)    soup = bs(sess.get(boj_url).text, 'html.parser')    if soup.find('a', &#123;'class': 'username'&#125;) is None:        print(\"Invalid login info\")        exit(1)\n2.2. 테스트 소스 제출해보기소스를 제출할 때 패킷을 확인해볼까요?\n\n\n눈에 띄는 것은 problem_id는 문제번호, language는 제가 선택한 언어인 C++14에 해당하는 번호, code_open은 코드 공개여부(저는 공개가 기본 설정입니다), source는 소스 전문인건 알겠는데, csrf_key는 또 뭐람.. 킁 보안토큰같은데..\nhttps://stackoverflow.com/questions/5207160/what-is-a-csrf-token-what-is-its-importance-and-how-does-it-work\n여기 좋은 설명이 있는 것 같아서 대체합니다. 소스 제출의 부정사용 방지로 보이네요. 그러니까 이 글의 링크 중 하나에 백준에 틀린 소스를 제출하는 것을 심어놓으면 여러분의 백준 정답률을 떨구는 효과를 기대할 수 있습니다(!!). 그런거 막아주는 거에요.\n\ncsrf_key는 제출 사이트의 html을 확인해보니까 hidden으로 감춰져있던 것이 모습을 드러내줍니다. 이걸 받아서 쓰면 되겠군요! input 태그 안에서 name으로 찾아주면 됩니다. \n12345try:\tkey = soup.find('input', &#123;'name': 'csrf_key'&#125;)['value']except TypeError:\tprint(\"Wrong problem number\")\texit(1)\nlanguage의 번호도 언어 선택창을 html로 읽어보면 확인할 수 있습니다.\n123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566&lt;select id=\"language\" name=\"language\" data-placeholder=\"언어를 선택해 주세요.\" class=\"language-select col-md-2 chosen-select\" data-no_results_text=\"없는 언어 입니다.\" style=\"display: none;\"&gt;\t&lt;option value=\"88\" data-mime=\"text/x-c++src\"&gt;C++14&lt;/option&gt;\t&lt;option value=\"3\" data-mime=\"text/x-java\"&gt;Java&lt;/option&gt;\t&lt;option value=\"28\" data-mime=\"text/x-python\" selected=\"\"&gt;Python 3&lt;/option&gt;\t&lt;option value=\"75\" data-mime=\"text/x-csrc\"&gt;C11&lt;/option&gt;\t&lt;option value=\"73\" data-mime=\"text/x-python\"&gt;PyPy3&lt;/option&gt;\t&lt;option value=\"0\" data-mime=\"text/x-csrc\"&gt;C&lt;/option&gt;\t&lt;option value=\"1\" data-mime=\"text/x-c++src\"&gt;C++&lt;/option&gt;\t&lt;option value=\"49\" data-mime=\"text/x-c++src\"&gt;C++11&lt;/option&gt;\t&lt;option value=\"84\" data-mime=\"text/x-c++src\"&gt;C++17&lt;/option&gt;\t&lt;option value=\"91\" data-mime=\"text/x-java\"&gt;Java (OpenJDK)&lt;/option&gt;\t&lt;option value=\"93\" data-mime=\"text/x-java\"&gt;Java 11&lt;/option&gt;\t&lt;option value=\"6\" data-mime=\"text/x-python\"&gt;Python 2&lt;/option&gt;\t&lt;option value=\"32\" data-mime=\"text/x-python\"&gt;PyPy2&lt;/option&gt;\t&lt;option value=\"68\" data-mime=\"text/x-ruby\"&gt;Ruby 2.5&lt;/option&gt;\t&lt;option value=\"69\" data-mime=\"text/x-kotlin\"&gt;Kotlin (JVM)&lt;/option&gt;\t&lt;option value=\"92\" data-mime=\"text/x-kotlin\"&gt;Kotlin (Native)&lt;/option&gt;\t&lt;option value=\"74\" data-mime=\"text/x-swift\"&gt;Swift&lt;/option&gt;\t&lt;option value=\"58\" data-mime=\"text/plain\"&gt;Text&lt;/option&gt;\t&lt;option value=\"62\" data-mime=\"text/x-csharp\"&gt;C# 6.0&lt;/option&gt;\t&lt;option value=\"17\" data-mime=\"text/javascript\"&gt;node.js&lt;/option&gt;\t&lt;option value=\"12\" data-mime=\"text/x-go\"&gt;Go&lt;/option&gt;\t&lt;option value=\"29\" data-mime=\"text/x-d\"&gt;D&lt;/option&gt;\t&lt;option value=\"37\" data-mime=\"text/x-fsharp\"&gt;F#&lt;/option&gt;\t&lt;option value=\"7\" data-mime=\"text/x-php\"&gt;PHP&lt;/option&gt;\t&lt;option value=\"44\" data-mime=\"text/plain\"&gt;Rust&lt;/option&gt;\t&lt;option value=\"2\" data-mime=\"text/x-pascal\"&gt;Pascal&lt;/option&gt;\t&lt;option value=\"16\" data-mime=\"text/x-lua\"&gt;Lua&lt;/option&gt;\t&lt;option value=\"8\" data-mime=\"text/x-perl\"&gt;Perl&lt;/option&gt;\t&lt;option value=\"72\" data-mime=\"text/x-rsrc\"&gt;R&lt;/option&gt;\t&lt;option value=\"10\" data-mime=\"text/x-objectivec\"&gt;Objective-C&lt;/option&gt;\t&lt;option value=\"64\" data-mime=\"text/x-objectivec\"&gt;Objective-C++&lt;/option&gt;\t&lt;option value=\"59\" data-mime=\"text/x-csrc\"&gt;C (Clang)&lt;/option&gt;\t&lt;option value=\"60\" data-mime=\"text/x-c++src\"&gt;C++ (Clang)&lt;/option&gt;\t&lt;option value=\"66\" data-mime=\"text/x-c++src\"&gt;C++11 (Clang)&lt;/option&gt;\t&lt;option value=\"67\" data-mime=\"text/x-c++src\"&gt;C++14 (Clang)&lt;/option&gt;\t&lt;option value=\"77\" data-mime=\"text/x-csrc\"&gt;C11 (Clang)&lt;/option&gt;\t&lt;option value=\"85\" data-mime=\"text/x-c++src\"&gt;C++17 (Clang)&lt;/option&gt;\t&lt;option value=\"79\" data-mime=\"text/plain\"&gt;Golfscript&lt;/option&gt;\t&lt;option value=\"27\" data-mime=\"text/plain\"&gt;Assembly (32bit)&lt;/option&gt;\t&lt;option value=\"87\" data-mime=\"text/plain\"&gt;Assembly (64bit)&lt;/option&gt;\t&lt;option value=\"63\" data-mime=\"text/x-vb\"&gt;VB.NET 4.0&lt;/option&gt;\t&lt;option value=\"5\" data-mime=\"text/x-sh\"&gt;Bash&lt;/option&gt;\t&lt;option value=\"13\" data-mime=\"text/x-fortran\"&gt;Fortran&lt;/option&gt;\t&lt;option value=\"14\" data-mime=\"text/x-scheme\"&gt;Scheme&lt;/option&gt;\t&lt;option value=\"19\" data-mime=\"text/plain\"&gt;Ada&lt;/option&gt;\t&lt;option value=\"21\" data-mime=\"text/plain\"&gt;awk&lt;/option&gt;\t&lt;option value=\"22\" data-mime=\"text/x-ocaml\"&gt;OCaml&lt;/option&gt;\t&lt;option value=\"23\" data-mime=\"text/x-brainfuck\"&gt;Brainfuck&lt;/option&gt;\t&lt;option value=\"24\" data-mime=\"text/plain\"&gt;Whitespace&lt;/option&gt;\t&lt;option value=\"26\" data-mime=\"text/x-tcl\"&gt;Tcl&lt;/option&gt;\t&lt;option value=\"34\" data-mime=\"text/javascript\"&gt;Rhino&lt;/option&gt;\t&lt;option value=\"35\" data-mime=\"text/x-cobol\"&gt;Cobol&lt;/option&gt;\t&lt;option value=\"41\" data-mime=\"text/x-c++src\"&gt;Pike&lt;/option&gt;\t&lt;option value=\"43\" data-mime=\"text/plain\"&gt;sed&lt;/option&gt;\t&lt;option value=\"46\" data-mime=\"text/plain\"&gt;Boo&lt;/option&gt;\t&lt;option value=\"47\" data-mime=\"text/plain\"&gt;Intercal&lt;/option&gt;\t&lt;option value=\"48\" data-mime=\"text/plain\"&gt;bc&lt;/option&gt;\t&lt;option value=\"53\" data-mime=\"text/plain\"&gt;Nemerle&lt;/option&gt;\t&lt;option value=\"54\" data-mime=\"text/plain\"&gt;Cobra&lt;/option&gt;\t&lt;option value=\"70\" data-mime=\"text/plain\"&gt;Algol 68&lt;/option&gt;\t&lt;option value=\"71\" data-mime=\"text/plain\"&gt;Befunge&lt;/option&gt;\t&lt;option value=\"81\" data-mime=\"text/x-haxe\"&gt;Haxe&lt;/option&gt;\t&lt;option value=\"82\" data-mime=\"text/plain\"&gt;LOLCODE&lt;/option&gt;\t&lt;option value=\"83\" data-mime=\"text/plain\"&gt;아희&lt;/option&gt;&lt;/select&gt;\n여기서 필요한 것으로 dictionary를 만들어 관리하면 되겠습니다. 저는 C++14랑 Python만 사용하니 그 두 개만 만들었습니다.\n1LANG = &#123;\"C++14\":88, \"Python 3\":28&#125;\n지금까지 모은 제출 정보들을 dict로 모아서 제출하면 됩니다. code_open의 onlyaccepted는 ‘맞았을 때만 공개’ 옵션입니다. 위 패킷에서 읽은한 주소 형태가 /submit/1001 이었죠?\n12345678910111213if language not in LANG:    print(\"Invalid language\")    exit(1)data = &#123;    'problem_id': problem_id,    'source': code,    'language': LANG[language],    'code_open': 'onlyaccepted',    'csrf_key': key&#125;sess.post(boj_url + '/submit/' + str(problem_id), data=data)\n지금까지 작성한 Python 소스를 정리하면 다음과 같습니다.\n1234567891011121314151617181920212223242526272829303132333435363738394041import requestsfrom bs4 import BeautifulSoup as bsLOGIN_INFO = &#123;\"login_user_id\":\"(아이디)\", \"login_password\":\"(비밀번호)\"&#125;boj_url = \"https://www.acmicpc.net/\"LANG = &#123;\"C++14\":88, \"Python 3\":28&#125;problem_id = 1001language = \"C++14\"with open(\"1001.cpp\", 'r') as f:    code = f.read()with requests.Session() as sess:    sess.post(boj_url+'signin',data=LOGIN_INFO)    soup = bs(sess.get(boj_url).text, 'html.parser')    if soup.find('a', &#123;'class': 'username'&#125;) is None:        print(\"invalid login info\")        exit(1)    soup = bs(sess.get(boj_url + 'submit/' + str(problem_id)).text, 'html.parser')    try:        key = soup.find('input', &#123;'name': 'csrf_key'&#125;)['value']    except TypeError:        print(\"Wrong problem number\")        exit(1)    if language not in LANG:        print(\"Invalid language\")        exit(1)    data = &#123;        'problem_id': problem_id,        'source': code,        'language': LANG[language],        'code_open': 'onlyaccepted',        'csrf_key': key    &#125;    sess.post(boj_url + '/submit/' + str(problem_id), data=data)\n3. 결과 확인이제 막바지입니다. 제출할 일도 없어서 쉬운 것만 남았네요. 어떻게 ‘채점이 종료되었다’는 것을 확인할 것인지를 생각해보아야 합니다. 관찰이 필요한 부분이죠.\n먼저 제출하고 채점을 기다릴 때를 확인해보았습니다.\n\n저 ‘기다리는 중’이라는 상태 메시지의 html은 다음과 같습니다:\n123&lt;span class=\"result-text\"&gt;    &lt;span class=\"result-wait\"&gt;기다리는 중&lt;/span&gt;&lt;/span&gt;\n채점 중일 때는 다음과 같습니다:\n\n123&lt;span class=\"result-text\"&gt;    &lt;span class=\"result-judging\"&gt;채점 중 (6%, 11초)&lt;/span&gt;&lt;/span&gt;\n채점이 완료되었을 때는 어떨까요?\n\n123&lt;span class=\"result-text\"&gt;    &lt;span class=\"result-ac\"&gt;맞았습니다!!&lt;/span&gt;&lt;/span&gt;\nclass의 이름이 바뀌면서 채점 결과가 들어갑니다. 즉, “result-ac”가 None이면 아직 채점이 중이라는 뜻이에요. 이를 이용해 채점이 완료되었는지를 식별할 수 있습니다. 이를 이용해 while문을 탈출해주면 되겠습니다.\n12345678910while True:    url = boj_url + '/status?from_mine=1&amp;problem_id=' + str(problem_id) + '&amp;user_id' + LOGIN_INFO[\"login_user_id\"]    soup = bs(sess.get(url).text, 'html.parser')    result = soup.find('span', &#123;'class': 'result-ac'&#125;).string.strip()    if result is not None:        break    status = soup.find('span', &#123;'class': 'result-text'&#125;).find('span').string.strip()    print('\\r%s' % status, end='')print('\\r%s' % result, end='')\n마무리12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152import requestsfrom bs4 import BeautifulSoup as bsLOGIN_INFO = &#123;\"login_user_id\":\"(아이디)\", \"login_password\":\"(비밀번호)\"&#125;boj_url = \"https://www.acmicpc.net/\"LANG = &#123;\"C++14\":88, \"Python 3\":28&#125;problem_id = 1001language = \"C++14\"with open(\"1001.cpp\", 'r') as f:    code = f.read()with requests.Session() as sess:    sess.post(boj_url+'signin',data=LOGIN_INFO)    soup = bs(sess.get(boj_url).text, 'html.parser')    if soup.find('a', &#123;'class': 'username'&#125;) is None:        print(\"invalid login info\")        exit(1)    soup = bs(sess.get(boj_url + 'submit/' + str(problem_id)).text, 'html.parser')    try:        key = soup.find('input', &#123;'name': 'csrf_key'&#125;)['value']    except TypeError:        print(\"Wrong problem number\")        exit(1)    if language not in LANG:        print(\"Invalid language\")        exit(1)    data = &#123;        'problem_id': problem_id,        'source': code,        'language': LANG[language],        'code_open': 'onlyaccepted',        'csrf_key': key    &#125;    sess.post(boj_url + '/submit/' + str(problem_id), data=data)    while True:        url = boj_url + '/status?from_mine=1&amp;problem_id=' + str(problem_id) + '&amp;user_id' + LOGIN_INFO[\"login_user_id\"]        soup = bs(sess.get(url).text, 'html.parser')        result = soup.find('span', &#123;'class': 'result-ac'&#125;).string.strip()        if result is not None:            break        status = soup.find('span', &#123;'class': 'result-text'&#125;).find('span').string.strip()        print('\\r%s' % status, end='')    print('\\r%s' % result, end='')\n지금까지 작성한 코드 전문입니다. 저는 이를 이용해 github 자동 저장이나, 운에 의지해야 하는 일부 문제들에 접근하려고 합니다. (이제 랜덤 게임~~을 풀 수 있는 것인가!) 많은 분에게 도움이 되었으면 좋겠네요.\n","dateCreated":"2019-01-28T07:43:26+09:00","dateModified":"2019-01-28T11:27:03+09:00","datePublished":"2019-01-28T07:43:26+09:00","description":"","headline":"Python을 이용한 백준 자동 소스 제출 봇 만들기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/01/28/BOJ-submit-bot/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile.jpg","logo":{"@type":"ImageObject","url":"profile.jpg"}},"url":"https://3-24.github.io/2019/01/28/BOJ-submit-bot/","keywords":"개발, 백준, 봇, Python"}</script>
+    <meta name="description" content="Requirements제작 언어는 Python 3를 기본으로 합니다. Python을 이용해 웹에 로그인이나 소스를 제출하기 위해서 requests 패키지가, 페이지 내용을 효율적으로 읽기 위한 BeautifulSoup4 패키지가 필요합니다. 해당 패키지가 없다면 (Windows 기준) cmd에서 다음을 입력하여 설치할 수 있습니다. 12pip install">
+<meta name="keywords" content="개발,백준,봇,Python">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="푹신푹신 후와후와">
-<meta property="og:url" content="https://3-24.github.io/tags/개발/index.html">
+<meta property="og:title" content="Python을 이용한 백준 자동 소스 제출 봇 만들기">
+<meta property="og:url" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/index.html">
 <meta property="og:site_name" content="푹신푹신 후와후와">
+<meta property="og:description" content="Requirements제작 언어는 Python 3를 기본으로 합니다. Python을 이용해 웹에 로그인이나 소스를 제출하기 위해서 requests 패키지가, 페이지 내용을 효율적으로 읽기 위한 BeautifulSoup4 패키지가 필요합니다. 해당 패키지가 없다면 (Windows 기준) cmd에서 다음을 입력하여 설치할 수 있습니다. 12pip install">
 <meta property="og:locale" content="ko">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/fiddler01.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome01.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome03.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/fiddler02.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome02.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome04.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome06.png">
+<meta property="og:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/chrome05.png">
+<meta property="og:updated_time" content="2019-01-28T02:27:03.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="푹신푹신 후와후와">
+<meta name="twitter:title" content="Python을 이용한 백준 자동 소스 제출 봇 만들기">
+<meta name="twitter:description" content="Requirements제작 언어는 Python 3를 기본으로 합니다. Python을 이용해 웹에 로그인이나 소스를 제출하기 위해서 requests 패키지가, 페이지 내용을 효율적으로 읽기 위한 BeautifulSoup4 패키지가 필요합니다. 해당 패키지가 없다면 (Windows 기준) cmd에서 다음을 입력하여 설치할 수 있습니다. 12pip install">
+<meta name="twitter:image" content="https://3-24.github.io/2019/01/28/BOJ-submit-bot/fiddler01.png">
     
     
         
@@ -55,7 +68,7 @@
 
     
     <!--autocanonical-->
-    <link rel="canonical" href="https://3-24.github.io/tags/개발/">
+    <link rel="canonical" href="https://3-24.github.io/2019/01/28/boj-submit-bot/">
 
 </head>
 
@@ -70,7 +83,7 @@
         
     
 
-<header id="header" data-behavior="1">
+<header id="header" data-behavior="4">
     <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
     <div class="header-title">
         <a class="header-title-link" href="/ ">푹신푹신 후와후와</a>
@@ -93,7 +106,7 @@
         
     
 
-<nav id="sidebar" data-behavior="1">
+<nav id="sidebar" data-behavior="4">
     <div class="sidebar-container">
         
             <div class="sidebar-profile">
@@ -223,25 +236,21 @@
 </nav>
 
             
-            <div id="main" data-behavior="1" class="
+            <div id="main" data-behavior="4" class="
                         hasCoverMetaIn
                         ">
                 
-    <section class="postShorten-group main-content-wrap">
+<article class="post">
     
     
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2019/01/28/BOJ-submit-bot/">
-                            Python을 이용한 백준 자동 소스 제출 봇 만들기
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            Python을 이용한 백준 자동 소스 제출 봇 만들기
+        </h1>
+    
+    
+        <div class="post-meta">
     <time datetime="2019-01-28T07:43:26+09:00">
 	
 		    1월 28, 2019
@@ -256,10 +265,13 @@
     
 </div>
 
-            </div>
-            
-                <div class="postShorten-content">
-                    <h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><p>제작 언어는 Python 3를 기본으로 합니다.</p>
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><p>제작 언어는 Python 3를 기본으로 합니다.</p>
 <p>Python을 이용해 웹에 로그인이나 소스를 제출하기 위해서 requests 패키지가, 페이지 내용을 효율적으로 읽기 위한 BeautifulSoup4 패키지가 필요합니다. 해당 패키지가 없다면 (Windows 기준) cmd에서 다음을 입력하여 설치할 수 있습니다.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install requests</span><br><span class="line">pip install bs4</span><br></pre></td></tr></table></figure>
 <p>개발에 이해를 돕는 용도로 웹 디버깅 소프트웨어인 <a href="https://www.google.com/search?q=Fiddler&amp;oq=Fiddler&amp;aqs=chrome..69i57j69i60l3.2554j0j7&amp;sourceid=chrome&amp;ie=UTF-8" rel="external nofollow noopener noreferrer" target="_blank">Fiddler</a>를 사용하시면 더 좋습니다. 필수사항은 아닙니다.</p>
@@ -316,102 +328,104 @@
 <h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> bs</span><br><span class="line"></span><br><span class="line">LOGIN_INFO = &#123;<span class="string">"login_user_id"</span>:<span class="string">"(아이디)"</span>, <span class="string">"login_password"</span>:<span class="string">"(비밀번호)"</span>&#125;</span><br><span class="line">boj_url = <span class="string">"https://www.acmicpc.net/"</span></span><br><span class="line">LANG = &#123;<span class="string">"C++14"</span>:<span class="number">88</span>, <span class="string">"Python 3"</span>:<span class="number">28</span>&#125;</span><br><span class="line"></span><br><span class="line">problem_id = <span class="number">1001</span></span><br><span class="line">language = <span class="string">"C++14"</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">"1001.cpp"</span>, <span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    code = f.read()</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> requests.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    sess.post(boj_url+<span class="string">'signin'</span>,data=LOGIN_INFO)</span><br><span class="line"></span><br><span class="line">    soup = bs(sess.get(boj_url).text, <span class="string">'html.parser'</span>)</span><br><span class="line">    <span class="keyword">if</span> soup.find(<span class="string">'a'</span>, &#123;<span class="string">'class'</span>: <span class="string">'username'</span>&#125;) <span class="keyword">is</span> <span class="keyword">None</span>:</span><br><span class="line">        print(<span class="string">"invalid login info"</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    soup = bs(sess.get(boj_url + <span class="string">'submit/'</span> + str(problem_id)).text, <span class="string">'html.parser'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        key = soup.find(<span class="string">'input'</span>, &#123;<span class="string">'name'</span>: <span class="string">'csrf_key'</span>&#125;)[<span class="string">'value'</span>]</span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        print(<span class="string">"Wrong problem number"</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> language <span class="keyword">not</span> <span class="keyword">in</span> LANG:</span><br><span class="line">        print(<span class="string">"Invalid language"</span>)</span><br><span class="line">        exit(<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    data = &#123;</span><br><span class="line">        <span class="string">'problem_id'</span>: problem_id,</span><br><span class="line">        <span class="string">'source'</span>: code,</span><br><span class="line">        <span class="string">'language'</span>: LANG[language],</span><br><span class="line">        <span class="string">'code_open'</span>: <span class="string">'onlyaccepted'</span>,</span><br><span class="line">        <span class="string">'csrf_key'</span>: key</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    sess.post(boj_url + <span class="string">'/submit/'</span> + str(problem_id), data=data)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> <span class="keyword">True</span>:</span><br><span class="line">        url = boj_url + <span class="string">'/status?from_mine=1&amp;problem_id='</span> + str(problem_id) + <span class="string">'&amp;user_id'</span> + LOGIN_INFO[<span class="string">"login_user_id"</span>]</span><br><span class="line">        soup = bs(sess.get(url).text, <span class="string">'html.parser'</span>)</span><br><span class="line">        result = soup.find(<span class="string">'span'</span>, &#123;<span class="string">'class'</span>: <span class="string">'result-ac'</span>&#125;).string.strip()</span><br><span class="line">        <span class="keyword">if</span> result <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        status = soup.find(<span class="string">'span'</span>, &#123;<span class="string">'class'</span>: <span class="string">'result-text'</span>&#125;).find(<span class="string">'span'</span>).string.strip()</span><br><span class="line">        print(<span class="string">'\r%s'</span> % status, end=<span class="string">''</span>)</span><br><span class="line"></span><br><span class="line">    print(<span class="string">'\r%s'</span> % result, end=<span class="string">''</span>)</span><br></pre></td></tr></table></figure>
 <p>지금까지 작성한 코드 전문입니다. 저는 이를 이용해 github 자동 저장이나, 운에 의지해야 하는 일부 문제들에 접근하려고 합니다. (이제 <a href="https://www.acmicpc.net/problem/10944" rel="external nofollow noopener noreferrer" target="_blank">랜덤 게임~~</a>을 풀 수 있는 것인가!) 많은 분에게 도움이 되었으면 좋겠네요.</p>
 
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/2019/01/28/BOJ-submit-bot/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
+
         </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
         
-    </article>
-    
-    
-    <article class="postShorten postShorten--thumbnailimg-bottom">
-        <div class="postShorten-wrap">
-            
-            <div class="postShorten-header">
-                <h1 class="postShorten-title">
-                    
-                        <a class="link-unstyled" href="/2019/01/17/blog-setup/">
-                            블로그 구현 로그
-                        </a>
-                    
-                </h1>
-                <div class="postShorten-meta">
-    <time datetime="2019-01-17T19:20:30+09:00">
-	
-		    1월 17, 2019
-    	
-    </time>
-    
-        <span>in </span>
-        
-    <a class="category-link" href="/categories/공지사항/">공지사항</a>
-
-
-    
-</div>
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/Python/">Python</a> <a class="tag tag--primary tag--small t-link" href="/tags/개발/">개발</a> <a class="tag tag--primary tag--small t-link" href="/tags/백준/">백준</a> <a class="tag tag--primary tag--small t-link" href="/tags/봇/">봇</a>
 
             </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/blog-setup/" data-tooltip="블로그 구현 로그" aria-label="NEXT: 블로그 구현 로그">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
             
-                <div class="postShorten-content">
-                    <h4 id="190115"><a href="#190115" class="headerlink" title="190115"></a>190115</h4><ul>
-<li><p>Hexo 기반의 블로그입니다. 현재 적용하고 있는 테마는 <a href="https://github.com/LouisBarranqueiro/hexo-theme-tranquilpeak" rel="external nofollow noopener noreferrer" target="_blank">Tranquilpeak</a>입니다.</p>
-</li>
-<li><p>Mathjax 기능을 지원하기 위해 <a href="https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/" rel="external nofollow noopener noreferrer" target="_blank">https://hyeshinoh.github.io/2018/10/24/hexo_mathjax_00/</a> 를 참고해서 설정했습니다.</p>
-</li>
-<li><p>기본 폰트를 변경하기 위해</p>
-<p><a href="http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/" rel="external nofollow noopener noreferrer" target="_blank">http://blog.lattecom.xyz/2016/05/08/tranquilpeak-theme-web-font/</a></p>
-<p><a href="https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/" rel="external nofollow noopener noreferrer" target="_blank">https://taetaetae.github.io/2017/08/27/hexo-themes-tranquilpeak/</a></p>
-<p>를 따라갔습니다. (두 글 다 필요합니다)</p>
-</li>
-<li><p>프로필과 사이드바를 개인화customization했습니다.</p>
-</li>
-<li><p>Disqus로 댓글이 가능하게 만들었습니다.</p>
-</li>
-</ul>
-<h4 id="190117"><a href="#190117" class="headerlink" title="190117"></a>190117</h4><ul>
-<li><a href="https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/" rel="external nofollow noopener noreferrer" target="_blank">https://futurecreator.github.io/2016/06/23/search-engine-optimization-hexo-plugins/</a> 를 참고하여 검색 최적화 설정을 했습니다. 사이트맵도 자동으로 만들어주고 좋은 기능이 많네요!</li>
-</ul>
-<h4 id="Plan"><a href="#Plan" class="headerlink" title="Plan"></a>Plan</h4><ul>
-<li>Algolia Search 적용하기: 블로그 내 검색 기능을 활성화합니다.</li>
-<li>MathJax 가로줄이 잘리는 문제 해결하기: 모바일에서 보면 간혹 긴 수식이 잘리는 문제가 있습니다.</li>
-</ul>
-
-                    
-                        
-
-                    
-                    
-                        <p>
-                            <a href="/2019/01/17/blog-setup/#post-footer" class="postShorten-excerpt_link link">
-                                Comment and share
-                            </a>
-                        </p>
-                    
-                </div>
             
-        </div>
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
         
-    </article>
-    
-    <div class="pagination-bar">
-    <ul class="pagination">
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
         
         
-        <li class="pagination-number">page 1 of 1</li>
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
     </ul>
 </div>
 
-</section>
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
 
 
                 <footer id="footer" class="main-content-wrap">
@@ -421,6 +435,115 @@
 </footer>
 
             </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/17/blog-setup/" data-tooltip="블로그 구현 로그" aria-label="NEXT: 블로그 구현 로그">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/28/BOJ-submit-bot/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
             
         </div>
         
@@ -470,6 +593,25 @@
 <script src="/assets/js/thumbs.js"></script>
 <script src="/assets/js/tranquilpeak.js"></script>
 <!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://3-24.github.io/2019/01/28/BOJ-submit-bot/';
+                 
+                    this.page.identifier = '2019/01/28/BOJ-submit-bot/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'pugsinpugsin-huwahuwa';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
 
 
 
