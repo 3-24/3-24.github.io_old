@@ -1,0 +1,612 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="푹신푹신 후와후와">
+    <title>이분그래프 - 푹신푹신 후와후와</title>
+    <meta name="author" content="Youngseok Choe">
+    
+        <meta name="keywords" content="mathematics,computer science,">
+    
+    
+        <link rel="icon" href="https://3-24.github.io/assets/images/fav.ico">
+    
+    
+        <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
+    
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile02.jpg"},"articleBody":"1. 정의그래프 $G = (V,E)$에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다.\n공집합이 아닌 $V$의 분할partition $\\{V_1 ,V_2\\}$가 있어서\n\n E \\subseteq \\{ \\{v_1, v_2\\} : v_1 \\in V_1, v_2 \\in V_2 \\}\\이와 같은 이분그래프에 대해 추가적인 표기법으로 $G = (V_1, V_2, E)$를 사용하기도 합니다. Figure 1과 같은 형태입니다.\n\n\nFigure 1. 이분그래프의 예\n\n\n\n\n2. 판별따라서 어떤 그래프가 이분그래프인지 아닌지 판별할 때는 Figure 2와 같이 두 가지 색깔을 칠하면서 접근하면 좋습니다. 어떤 변을 잡아도 그 변을 구성하는 꼭짓점은 다른 색깔로 칠해져야 하기 때문입니다.\n\n\nFigure 2. 이분그래프의 판별\n\n\n\n\n2.1. 알고리즘프로그래밍으로 이분그래프를 확인할 때는 BFS 방식을 사용하면 됩니다. 2에서 이분그래프를 판별하는 과정을 그대로 적용합니다. 입력 형태는 (#)와 같고, Python 3.7에서 쓰여진 코드는 다음과 같습니다:\n123456789101112131415161718192021222324252627282930313233343536373839test_nbr = int(input()) # number of test casesdef isBipartite():    # v and e is number of vertexes and edges, respectively.    v,e = map(int,input().split())    # None if not colored    # If colored, there are two bool cases: False and True.    colorArr = [None for _ in range(v+1)]    adjacentPoints = [[] for _ in range(v+1)]    for i in range(e):        v1, v2 = map(int, input().split()) # edge (v1, v2) is expected input        adjacentPoints[v1].append(v2)        adjacentPoints[v2].append(v1)    queue = []    node = set([i for i in range(1,v+1)]) # for non-connected graph    while bool(node): # node is nonempty        c = node.pop()        queue.append(c)        while bool(queue): # queue is nonempty            start = queue[0]            for u in adjacentPoints[start]:                if colorArr[u] is not None:                    if colorArr[u] is colorArr[start]:                        return False                else:                    colorArr[u] = not colorArr[start]                    queue.append(u)            del queue[0]            if start != c: node.remove(start)    return Truefor _ in range(test_nbr):    print('YES' if isBipartite() else 'NO')\n3. 정리이분그래프는 홀수 길이의 순환cycle이 존재하지 않고, 그 역도 성립한다.\n3.1. 정방향 증명이분그래프는 홀수 길이의 순환이 존재하지 않는다.\n이분그래프 $G = (U,V,E)$에 대해 $E \\subseteq U \\times V$이므로 모든 순환의 형태는 $U$와 $V$가 교대해서 나타난다. 따라서 그 순환의 길이는 짝수이다.\n3.2. 역방향 증명홀수 길이의 순환이 존재하지 않는 그래프는 이분그래프이다.\n\n직접 색칠하면서 이분그래프를 판별할 때의 과정이 증명에 담겨있습니다. 처음에 점 하나를 잡아서 색칠해놓고, 인접한 것들을 계속 반대 색깔로 칠해 나가면서 모순이 생기는 지를 확인해야 합니다. 이를 쉽게 서술하기 위해 ‘최소 경로’라는 개념을 도입했습니다.\n\n$G = (V,E)$에 대해 임의의 $v\\in V$를 잡자. 그리고 직접 이분그래프를 설계하기 위해 다음과 같은 $A,B \\subset V$를 정의한다.\n\nA = \\{ a \\in V : \\text{the shortest path from } a \\text{ to } v \\text{ has odd length }\\}\\\\\nB = \\{ b \\in V: \\text{the shortest path from } b \\text { to } v \\text{ has even length }\\}먼저, $A \\sqcup B = V$이다. ( $A,B$는 서로소disjoint이고, $A \\cup B=V$라는 뜻)\n이제 $E \\subseteq \\{ \\{a,b\\} : a \\in A \\wedge b \\in B \\} $임을 보일 것이다.\n서로 다른 $a_1, a_2 \\in A$에 대해 $a_1 $과 $v$ 사이의 최소 경로 길이를 $l(a_1)$, $a_2$와 $v$ 사이의 최소 경로 길이를 $l(a_2)​$라고 놓으면 다음이 성립한다:\n\n2 | l(a_1) + l(a_2)만약에 $ \\{a_1, a_2 \\} \\in E $라면 $a_1, a_2, v$를 잇는 순환의 길이가 홀수이므로 모순이다.\n$B$도 이것이 똑같이 성립한다.\n따라서 $A$끼리 연결된 선이 없고, $B$끼리도 연결된 선이 없으므로 $G$는 이분그래프이다.\n출처[1] https://tex.stackexchange.com/questions/15088/bipartite-graphs\n[2] http://mathworld.wolfram.com/BipartiteGraph.html\n","dateCreated":"2018-09-13T18:50:08+09:00","dateModified":"2019-02-27T21:09:28+09:00","datePublished":"2018-09-13T18:50:08+09:00","description":"","headline":"이분그래프","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2018/09/13/이분그래프/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile02.jpg","logo":{"@type":"ImageObject","url":"profile02.jpg"}},"url":"https://3-24.github.io/2018/09/13/이분그래프/","keywords":"이분그래프, BFS"}</script>
+    <meta name="description" content="1. 정의그래프 $G = (V,E)$에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다. 공집합이 아닌 $V$의 분할partition $\{V_1 ,V_2\}$가 있어서   E \subseteq \{ \{v_1, v_2\} : v_1 \in V_1, v_2 \in V_2 \}\이와 같은 이분그래프에 대해 추가적인 표기법으로 $G">
+<meta name="keywords" content="이분그래프,BFS">
+<meta property="og:type" content="blog">
+<meta property="og:title" content="이분그래프">
+<meta property="og:url" content="https://3-24.github.io/2018/09/13/이분그래프/index.html">
+<meta property="og:site_name" content="푹신푹신 후와후와">
+<meta property="og:description" content="1. 정의그래프 $G = (V,E)$에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다. 공집합이 아닌 $V$의 분할partition $\{V_1 ,V_2\}$가 있어서   E \subseteq \{ \{v_1, v_2\} : v_1 \in V_1, v_2 \in V_2 \}\이와 같은 이분그래프에 대해 추가적인 표기법으로 $G">
+<meta property="og:locale" content="ko">
+<meta property="og:image" content="https://i.stack.imgur.com/KZ9eG.png">
+<meta property="og:image" content="http://mathworld.wolfram.com/images/eps-gif/BipartiteGraph_1000.gif">
+<meta property="og:updated_time" content="2019-02-27T12:09:28.713Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="이분그래프">
+<meta name="twitter:description" content="1. 정의그래프 $G = (V,E)$에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다. 공집합이 아닌 $V$의 분할partition $\{V_1 ,V_2\}$가 있어서   E \subseteq \{ \{v_1, v_2\} : v_1 \in V_1, v_2 \in V_2 \}\이와 같은 이분그래프에 대해 추가적인 표기법으로 $G">
+<meta name="twitter:image" content="https://i.stack.imgur.com/KZ9eG.png">
+    
+    
+        
+    
+    
+        <meta property="og:image" content="https://3-24.github.io/assets/images/profile02.jpg">
+    
+    
+    
+    
+    <!--STYLES-->
+    <link rel="stylesheet" href="/assets/css/all.css">
+    <link rel="stylesheet" href="/assets/css/jquery.fancybox.css">
+    <link rel="stylesheet" href="/assets/css/thumbs.css">
+    <link rel="stylesheet" href="/assets/css/tranquilpeak.css">
+    <!--STYLES END-->
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-90928447-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-90928447-2');
+    </script>
+
+
+    
+    <!--autocanonical-->
+    <link rel="canonical" href="https://3-24.github.io/2018/09/13/이분그래프/">
+
+</head>
+
+    <body>
+        <div id="blog">
+            <!-- Define author's picture -->
+
+
+    
+        
+            
+        
+    
+
+<header id="header" data-behavior="4">
+    <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+    <div class="header-title">
+        <a class="header-title-link" href="/ ">푹신푹신 후와후와</a>
+    </div>
+    
+        
+            <a class="header-right-picture " href="#about">
+        
+        
+            <img class="header-picture" src="/assets/images/profile02.jpg" alt="Author&#39;s picture">
+        
+        </a>
+    
+</header>
+
+            <!-- Define author's picture -->
+
+
+
+        
+    
+
+<nav id="sidebar" data-behavior="4">
+    <div class="sidebar-container">
+        
+            <div class="sidebar-profile">
+                <a href="/#about">
+                    <img class="sidebar-profile-picture" src="/assets/images/profile02.jpg" alt="Author&#39;s picture">
+                </a>
+                <h4 class="sidebar-profile-name">Youngseok Choe</h4>
+                
+                    <h5 class="sidebar-profile-bio"><p>수학과 개발을 오가는 자유로운 학부생입니다.</p>
+</h5>
+                
+            </div>
+        
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/ " title="Home">
+                    
+                        <i class="sidebar-button-icon fa fa-home" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Home</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-categories" title="Categories">
+                    
+                        <i class="sidebar-button-icon fa fa-bookmark" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Categories</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-tags" title="Tags">
+                    
+                        <i class="sidebar-button-icon fa fa-tags" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Tags</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/all-archives" title="Archives">
+                    
+                        <i class="sidebar-button-icon fa fa-archive" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Archives</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link open-algolia-search" href="#search" title="Search">
+                    
+                        <i class="sidebar-button-icon fa fa-search" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Search</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="#about" title="About">
+                    
+                        <i class="sidebar-button-icon fa fa-question" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">About</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://github.com/3-24" target="_blank" rel="external nofollow noopener noreferrer" title="GitHub">
+                    
+                        <i class="sidebar-button-icon fab fa-github" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">GitHub</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="http://stackoverflow.com/10366230" target="_blank" rel="external nofollow noopener noreferrer" title="Stack Overflow">
+                    
+                        <i class="sidebar-button-icon fab fa-stack-overflow" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Stack Overflow</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="https://www.facebook.com/profile.php?id=100010703071923" target="_blank" rel="external nofollow noopener noreferrer" title="Facebook">
+                    
+                        <i class="sidebar-button-icon fab fa-facebook" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Facebook</span>
+                    </a>
+            </li>
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="mailto:yschoelife@gmail.com" target="_blank" rel="external nofollow noopener noreferrer" title="Mail">
+                    
+                        <i class="sidebar-button-icon fa fa-envelope" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">Mail</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+            <ul class="sidebar-buttons">
+            
+                <li class="sidebar-button">
+                    
+                        <a class="sidebar-button-link " href="/atom.xml" title="RSS">
+                    
+                        <i class="sidebar-button-icon fa fa-rss" aria-hidden="true"></i>
+                        <span class="sidebar-button-desc">RSS</span>
+                    </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+</nav>
+
+            
+            <div id="main" data-behavior="4" class="
+                        hasCoverMetaIn
+                        ">
+                
+<article class="post">
+    
+    
+        <div class="post-header main-content-wrap text-left">
+    
+        <h1 class="post-title">
+            이분그래프
+        </h1>
+    
+    
+        <div class="post-meta">
+    <time datetime="2018-09-13T18:50:08+09:00">
+	
+		    9월 13, 2018
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/수학/">수학</a>, <a class="category-link" href="/categories/수학/그래프-이론/">그래프 이론</a>
+
+
+    
+</div>
+
+    
+</div>
+
+    
+    <div class="post-content markdown">
+        <div class="main-content-wrap">
+            <h2 id="1-정의"><a href="#1-정의" class="headerlink" title="1. 정의"></a>1. 정의</h2><p>그래프 $G = (V,E)$에 대해 다음 조건을 만족하면 이분그래프bipartite graph 라고 합니다.</p>
+<p>공집합이 아닌 $V$의 분할partition $\{V_1 ,V_2\}$가 있어서</p>
+<script type="math/tex; mode=display">
+ E \subseteq \{ \{v_1, v_2\} : v_1 \in V_1, v_2 \in V_2 \}\</script><p>이와 같은 이분그래프에 대해 추가적인 표기법으로 $G = (V_1, V_2, E)$를 사용하기도 합니다. Figure 1과 같은 형태입니다.</p>
+<div align="center">
+<img src="https://i.stack.imgur.com/KZ9eG.png">
+<p></p>Figure 1. 이분그래프의 예<p></p>
+</div>
+
+
+
+<h2 id="2-판별"><a href="#2-판별" class="headerlink" title="2. 판별"></a>2. 판별</h2><p>따라서 어떤 그래프가 이분그래프인지 아닌지 판별할 때는 Figure 2와 같이 두 가지 색깔을 칠하면서 접근하면 좋습니다. 어떤 변을 잡아도 그 변을 구성하는 꼭짓점은 다른 색깔로 칠해져야 하기 때문입니다.</p>
+<div align="center">
+<img src="http://mathworld.wolfram.com/images/eps-gif/BipartiteGraph_1000.gif">
+<p></p>Figure 2. 이분그래프의 판별<p></p>
+</div>
+
+
+
+<h3 id="2-1-알고리즘"><a href="#2-1-알고리즘" class="headerlink" title="2.1. 알고리즘"></a>2.1. 알고리즘</h3><p><strong>프로그래밍</strong>으로 이분그래프를 확인할 때는 BFS 방식을 사용하면 됩니다. 2에서 이분그래프를 판별하는 과정을 그대로 적용합니다. 입력 형태는 (<a href="https://www.acmicpc.net/problem/1707" rel="external nofollow noopener noreferrer" target="_blank">#</a>)와 같고, Python 3.7에서 쓰여진 코드는 다음과 같습니다:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">test_nbr = int(input()) <span class="comment"># number of test cases</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isBipartite</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># v and e is number of vertexes and edges, respectively.</span></span><br><span class="line">    v,e = map(int,input().split())</span><br><span class="line"></span><br><span class="line">    <span class="comment"># None if not colored</span></span><br><span class="line">    <span class="comment"># If colored, there are two bool cases: False and True.</span></span><br><span class="line">    colorArr = [<span class="keyword">None</span> <span class="keyword">for</span> _ <span class="keyword">in</span> range(v+<span class="number">1</span>)]</span><br><span class="line">    adjacentPoints = [[] <span class="keyword">for</span> _ <span class="keyword">in</span> range(v+<span class="number">1</span>)]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(e):</span><br><span class="line">        v1, v2 = map(int, input().split()) <span class="comment"># edge (v1, v2) is expected input</span></span><br><span class="line">        adjacentPoints[v1].append(v2)</span><br><span class="line">        adjacentPoints[v2].append(v1)</span><br><span class="line"></span><br><span class="line">    queue = []</span><br><span class="line">    node = set([i <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,v+<span class="number">1</span>)]) <span class="comment"># for non-connected graph</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> bool(node): <span class="comment"># node is nonempty</span></span><br><span class="line">        c = node.pop()</span><br><span class="line">        queue.append(c)</span><br><span class="line">        <span class="keyword">while</span> bool(queue): <span class="comment"># queue is nonempty</span></span><br><span class="line">            start = queue[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">for</span> u <span class="keyword">in</span> adjacentPoints[start]:</span><br><span class="line">                <span class="keyword">if</span> colorArr[u] <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">                    <span class="keyword">if</span> colorArr[u] <span class="keyword">is</span> colorArr[start]:</span><br><span class="line">                        <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">                <span class="keyword">else</span>:</span><br><span class="line">                    colorArr[u] = <span class="keyword">not</span> colorArr[start]</span><br><span class="line">                    queue.append(u)</span><br><span class="line">            <span class="keyword">del</span> queue[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">if</span> start != c: node.remove(start)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> _ <span class="keyword">in</span> range(test_nbr):</span><br><span class="line">    print(<span class="string">'YES'</span> <span class="keyword">if</span> isBipartite() <span class="keyword">else</span> <span class="string">'NO'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="3-정리"><a href="#3-정리" class="headerlink" title="3. 정리"></a>3. 정리</h2><p><strong>이분그래프는 홀수 길이의 순환cycle이 존재하지 않고, 그 역도 성립한다.</strong></p>
+<h3 id="3-1-정방향-증명"><a href="#3-1-정방향-증명" class="headerlink" title="3.1. 정방향 증명"></a>3.1. 정방향 증명</h3><p><strong>이분그래프는 홀수 길이의 순환이 존재하지 않는다.</strong></p>
+<p>이분그래프 $G = (U,V,E)$에 대해 $E \subseteq U \times V$이므로 모든 순환의 형태는 $U$와 $V$가 교대해서 나타난다. 따라서 그 순환의 길이는 짝수이다.</p>
+<h3 id="3-2-역방향-증명"><a href="#3-2-역방향-증명" class="headerlink" title="3.2. 역방향 증명"></a>3.2. 역방향 증명</h3><p><strong>홀수 길이의 순환이 존재하지 않는 그래프는 이분그래프이다.</strong></p>
+<blockquote>
+<p>직접 색칠하면서 이분그래프를 판별할 때의 과정이 증명에 담겨있습니다. 처음에 점 하나를 잡아서 색칠해놓고, 인접한 것들을 계속 반대 색깔로 칠해 나가면서 모순이 생기는 지를 확인해야 합니다. 이를 쉽게 서술하기 위해 ‘최소 경로’라는 개념을 도입했습니다.</p>
+</blockquote>
+<p>$G = (V,E)$에 대해 임의의 $v\in V$를 잡자. 그리고 직접 이분그래프를 설계하기 위해 다음과 같은 $A,B \subset V$를 정의한다.</p>
+<script type="math/tex; mode=display">
+A = \{ a \in V : \text{the shortest path from } a \text{ to } v \text{ has odd length }\}\\
+B = \{ b \in V: \text{the shortest path from } b \text { to } v \text{ has even length }\}</script><p>먼저, $A \sqcup B = V$이다. ( $A,B$는 서로소disjoint이고, $A \cup B=V$라는 뜻)</p>
+<p>이제 $E \subseteq \{ \{a,b\} : a \in A \wedge b \in B \} $임을 보일 것이다.</p>
+<p>서로 다른 $a_1, a_2 \in A$에 대해 $a_1 $과 $v$ 사이의 최소 경로 길이를 $l(a_1)$, $a_2$와 $v$ 사이의 최소 경로 길이를 $l(a_2)​$라고 놓으면 다음이 성립한다:</p>
+<script type="math/tex; mode=display">
+2 | l(a_1) + l(a_2)</script><p>만약에 $ \{a_1, a_2 \} \in E $라면 $a_1, a_2, v$를 잇는 순환의 길이가 홀수이므로 모순이다.</p>
+<p>$B$도 이것이 똑같이 성립한다.</p>
+<p>따라서 $A$끼리 연결된 선이 없고, $B$끼리도 연결된 선이 없으므로 $G$는 이분그래프이다.</p>
+<h2 id="출처"><a href="#출처" class="headerlink" title="출처"></a>출처</h2><p>[1] <a href="https://tex.stackexchange.com/questions/15088/bipartite-graphs" rel="external nofollow noopener noreferrer" target="_blank">https://tex.stackexchange.com/questions/15088/bipartite-graphs</a></p>
+<p>[2] <a href="http://mathworld.wolfram.com/BipartiteGraph.html" rel="external nofollow noopener noreferrer" target="_blank">http://mathworld.wolfram.com/BipartiteGraph.html</a></p>
+
+            
+
+        </div>
+    </div>
+    <div id="post-footer" class="post-footer main-content-wrap">
+        
+            <div class="post-footer-tags">
+                <span class="text-color-light text-small">TAGGED IN</span><br>
+                
+    <a class="tag tag--primary tag--small t-link" href="/tags/BFS/">BFS</a> <a class="tag tag--primary tag--small t-link" href="/tags/이분그래프/">이분그래프</a>
+
+            </div>
+        
+        
+            <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/22/번사이드-보조정리/" data-tooltip="번사이드 보조정리" aria-label="PREVIOUS: 번사이드 보조정리">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+        
+        
+            
+                <div id="disqus_thread">
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+            
+        
+    </div>
+</article>
+
+
+
+                <footer id="footer" class="main-content-wrap">
+    <span class="copyrights">
+        Copyrights &copy; 2019 Youngseok Choe. All Rights Reserved.
+    </span>
+</footer>
+
+            </div>
+            
+                <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+                    <div class="post-actions-wrap">
+    <nav>
+        <ul class="post-actions post-action-nav">
+            <li class="post-action">
+                
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2018/09/22/번사이드-보조정리/" data-tooltip="번사이드 보조정리" aria-label="PREVIOUS: 번사이드 보조정리">
+                
+                    <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
+                </a>
+            </li>
+            <li class="post-action">
+                
+                    <a class="post-action-btn btn btn--disabled">
+                
+                    <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
+                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <ul class="post-actions post-action-share">
+        <li class="post-action hide-lg hide-md hide-sm">
+            <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions" aria-label="Share this post">
+                <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-facebook" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-twitter" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+            
+            
+            <li class="post-action hide-xs">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2018/09/13/이분그래프/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                    <i class="fab fa-google-plus" aria-hidden="true"></i>
+                </a>
+            </li>
+        
+        
+            
+                <li class="post-action">
+                    <a class="post-action-btn btn btn--default" href="#disqus_thread">
+                        <i class="fa fa-comment"></i>
+                    </a>
+                </li>
+            
+        
+        <li class="post-action">
+            
+                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+            
+                <i class="fa fa-list" aria-hidden="true"></i>
+            </a>
+        </li>
+    </ul>
+</div>
+
+
+                </div>
+                
+    <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+        <i id="btn-close-shareoptions" class="fa fa-times"></i>
+        <ul class="share-options">
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2018/09/13/이분그래프/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2018/09/13/이분그래프/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
+                    </a>
+                </li>
+            
+                
+                
+                <li class="share-option">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2018/09/13/이분그래프/" rel="external nofollow noopener noreferrer">
+                        <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
+                    </a>
+                </li>
+            
+        </ul>
+    </div>
+
+
+            
+        </div>
+        
+
+
+    
+        
+    
+
+<div id="about">
+    <div id="about-card">
+        <div id="about-btn-close">
+            <i class="fa fa-times"></i>
+        </div>
+        
+            <img id="about-card-picture" src="/assets/images/profile02.jpg" alt="Author&#39;s picture">
+        
+            <h4 id="about-card-name">Youngseok Choe</h4>
+        
+            <div id="about-card-bio"><p>수학과 개발을 오가는 자유로운 학부생입니다.</p>
+</div>
+        
+        
+            <div id="about-card-job">
+                <i class="fa fa-briefcase"></i>
+                <br>
+                <p>KAIST 19’ Student</p>
+
+            </div>
+        
+        
+            <div id="about-card-location">
+                <i class="fa fa-map-marker-alt"></i>
+                <br>
+                Republic of Korea
+            </div>
+        
+    </div>
+</div>
+
+        
+        
+<div id="cover" style="background-image:url('/assets/images/cover-v1.2.0.jpg');"></div>
+        <!--SCRIPTS-->
+<script src="/assets/js/jquery.js"></script>
+<script src="/assets/js/jquery.fancybox.js"></script>
+<script src="/assets/js/thumbs.js"></script>
+<script src="/assets/js/tranquilpeak.js"></script>
+<!--SCRIPTS END-->
+
+    
+        <script>
+             var disqus_config = function () {
+                 this.page.url = 'https://3-24.github.io/2018/09/13/이분그래프/';
+                 
+                    this.page.identifier = '2018/09/13/이분그래프/';
+                 
+             };
+            (function() {
+                var d = document, s = d.createElement('script');
+                var disqus_shortname = 'pugsinpugsin-huwahuwa';
+                s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+    
+
+
+
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML" async></script>
+</body>
+</html>

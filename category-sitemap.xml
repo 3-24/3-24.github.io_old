@@ -30,14 +30,35 @@
 
     <url>
         <loc>https://3-24.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/</loc>
-        <lastmod>2019-01-28T08:10:53.749Z</lastmod>
+        <lastmod>2019-01-28T08:49:28.393Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
 
     <url>
         <loc>https://3-24.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/%EB%B0%B1%EC%A4%80/</loc>
-        <lastmod>2019-01-28T08:10:53.749Z</lastmod>
+        <lastmod>2019-01-28T08:49:28.393Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/categories/%EC%88%98%ED%95%99/%EC%A1%B0%ED%95%A9%EB%A1%A0/</loc>
+        <lastmod>2019-02-27T11:59:38.851Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/categories/%EC%88%98%ED%95%99/</loc>
+        <lastmod>2019-02-27T12:09:28.713Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/categories/%EC%88%98%ED%95%99/%EA%B7%B8%EB%9E%98%ED%94%84-%EC%9D%B4%EB%A1%A0/</loc>
+        <lastmod>2019-02-27T12:09:28.713Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
