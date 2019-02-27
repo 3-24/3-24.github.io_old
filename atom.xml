@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3-24.github.io/"/>
-  <updated>2019-02-18T12:09:49.203Z</updated>
+  <updated>2019-01-28T08:49:28.393Z</updated>
   <id>https://3-24.github.io/</id>
   
   <author>
@@ -15,20 +15,6 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title>190218</title>
-    <link href="https://3-24.github.io/2019/02/18/190218/"/>
-    <id>https://3-24.github.io/2019/02/18/190218/</id>
-    <published>2019-02-18T12:09:49.000Z</published>
-    <updated>2019-02-18T12:09:49.203Z</updated>
-    
-    <summary type="html">
-    
-    </summary>
-    
-    
-  </entry>
   
   <entry>
     <title>Python을 이용한 백준 자동 소스 제출 봇 만들기</title>
