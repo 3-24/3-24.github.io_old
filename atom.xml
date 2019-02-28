@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3-24.github.io/"/>
-  <updated>2019-01-28T08:49:28.393Z</updated>
+  <updated>2019-02-28T07:33:36.665Z</updated>
   <id>https://3-24.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>현대대수 노트</title>
+    <link href="https://3-24.github.io/2019/02/28/Abstract-Algebra-TeX/"/>
+    <id>https://3-24.github.io/2019/02/28/Abstract-Algebra-TeX/</id>
+    <published>2019-02-28T07:27:42.000Z</published>
+    <updated>2019-02-28T07:33:36.665Z</updated>
+    
+    <content type="html"><![CDATA[<p>현대대수 공부도 할 겸 강의를 듣고 제 방식으로 현대대수에서 사용되는 개념들을 재구성하는 것을 목표로 연재중인 LaTeX 기반 노트입니다. 끝까지 완성하는 것을 목표로 해보겠습니다! 자세한 것은 해당 깃허브 프로젝트의 README.md를 참고해주세요.</p><p><a href="https://github.com/3-24/abstract-algebra" rel="external nofollow noopener noreferrer" target="_blank">https://github.com/3-24/abstract-algebra</a></p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;현대대수 공부도 할 겸 강의를 듣고 제 방식으로 현대대수에서 사용되는 개념들을 재구성하는 것을 목표로 연재중인 LaTeX 기반 노트입니다. 끝까지 완성하는 것을 목표로 해보겠습니다! 자세한 것은 해당 깃허브 프로젝트의 README.md를 참고해주
+      
+    
+    </summary>
+    
+      <category term="일상" scheme="https://3-24.github.io/categories/%EC%9D%BC%EC%83%81/"/>
+    
+    
+      <category term="LaTeX" scheme="https://3-24.github.io/tags/LaTeX/"/>
+    
+      <category term="Github" scheme="https://3-24.github.io/tags/Github/"/>
+    
+      <category term="Abstract Algebra" scheme="https://3-24.github.io/tags/Abstract-Algebra/"/>
+    
+  </entry>
   
   <entry>
     <title>Python을 이용한 백준 자동 소스 제출 봇 만들기</title>
