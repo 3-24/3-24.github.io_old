@@ -236,6 +236,75 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2019/03/24/실수-사이-유리수/">
+                            실수 사이 유리수
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-03-24T20:02:40+09:00">
+	
+		    3월 24, 2019
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/수학/">수학</a>, <a class="category-link" href="/categories/수학/해석학/">해석학</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <h2 id="실수와-cut"><a href="#실수와-cut" class="headerlink" title="실수와 cut"></a>실수와 cut</h2><p>실수는 cut의 집합으로 정의할 수 있습니다. 그리고 이 cut은 사실 어떤 유리수의 집합인데, 다음 성질들을 만족해야 해요:</p>
+<p>$\alpha \subset \mathbb{Q}$가 cut이려면</p>
+<ul>
+<li>$\alpha \ne \mathbb{Q}​$이고 $ \alpha \ne \emptyset ​$이다.</li>
+<li>모든 $x \in \alpha​$에 대하여 유리수 $ y &lt; x ​$일 때 $ y \in \alpha ​$이다.</li>
+<li>모든 $x \in \alpha​$에 대하여 $x&lt;y​$ 인 $y \in \alpha​$가 존재함</li>
+</ul>
+<p>즉 이렇게 $- \infty$부터 어떤 수까지 (열린) 범위를 cut이라고 정했어요. 그리고 이런 cut들을 다 모아놓으면 실수가 되는 것이죠. 연산도 수학자들이 잘 정의해서 우리가 아는 사칙연산이 모두 정상적으로 작동합니다.</p>
+<p>순서 관계는 어떨까요? cut의 포함 관계를 이용해서 정의하면 우리가 아는 일반적인 순서 관계의 성질을 그대로 만족합니다. 즉, $\alpha \subseteq \beta$ 이면 그냥 $\alpha \le \beta$라고 해버리는 거에요.</p>
+<h2 id="실수-안의-유리수"><a href="#실수-안의-유리수" class="headerlink" title="실수 안의 유리수"></a>실수 안의 유리수</h2><p>눈치가 빠르면 사실 $\mathbb{Q} \not\subset \mathbb{R}$  임을 확인했을 거에요. 왜냐하면 cut이 $\mathbb{Q}​$의 부분집합이었기 때문이죠. 그런데 유리수라는 개념은 실수에서도 중요한 역할을 합니다. 그래서 수학자들은 엄밀하게 실수 위에서 유리수를 따로 정의했어요.</p>
+<script type="math/tex; mode=display">
+\mathrm{For} \; q \in \mathbb{Q}, \quad q^\ast := \{ x \in \mathbb{Q} : x < q \}​</script><p>그러면 $q^\ast$는 cut이에요. 증명은 쉬우니까 넘어갈게요. 이렇게 생긴 애들을 싹 모아서</p>
+<script type="math/tex; mode=display">
+\mathbb{Q}^\ast := \{q^\ast \in \mathbb{R} : q \in \mathbb{Q} \}</script><p>이렇게 모아놓으면 이 $\mathbb{Q}^\ast \subseteq \mathbb{R} ​$은 원래 알던 유리수의 성질을 그대로 만족합니다.</p>
+<h2 id="실수-사이의-유리수"><a href="#실수-사이의-유리수" class="headerlink" title="실수 사이의 유리수"></a>실수 사이의 유리수</h2><p>이야기가 길어졌네요. ‘주어진 서로 다른 두 실수 사이에 유리수가 존재할까?’는 실수의 정의로부터 쉽게 알아낼 수 있습니다.</p>
+<p>서로 다른 실수 $\alpha, \beta $가 주어졌으면 순서 관계의 정의에 의해 $\alpha \subset \beta$입니다. 그러니까 $q \not\in \alpha$이고 $q \in \beta$인 유리수 $q\in \mathbb{Q}$가 존재한다는 거에요. 이런 $q$에 대해 $q^\ast \in \mathbb{Q}^\ast$를 생각해보면,</p>
+<p>$q \notin \alpha$이기 때문에 모든 $a \in \alpha$에 대해 $a &lt; q$이므로 $\alpha \subseteq q^ \ast $입니다.  만약 $ a \not&lt; q$였다면 cut의 두 번째 조건에 의해서 모순이었겠죠?</p>
+<p>또, $q \in \beta$이므로 $q$보다 작은 모든 유리수가 cut의 두 번째 조건에 의해 $\beta$에 들어갑니다. 따라서 $q^\ast \subset \beta$이죠. $q^\ast \ne \beta$인 이유는 $q \not\in q^\ast$이지만 $q \in \beta$이기 때문입니다.</p>
+<p>우리는 따라서 $\alpha \subseteq q^\ast \subset \beta$를 얻어냈습니다. 하지만 ‘사이’라는 것을 보이기에는 부족하죠. $q^\ast = \alpha$이거나 $q^\ast = \alpha​$이면 어떡하죠?</p>
+<p>저도 쓰다가 당황했는데요, 그래도 상관 없는게 $\alpha &lt; (\alpha + \beta) / 2 $를 잘 이용하면 되요. 그러니까 $\alpha, \beta$대신 $\frac {\alpha + \beta} 2 , \beta$에서 위 과정을 반복하면 또 $\frac {\alpha + \beta} 2 \subseteq p^\ast \subset \beta$를 만족하는 유리수 $p ^ \ast \in \mathbb{Q}^\ast $가 존재하기 때문에 $\alpha \subset p^\ast \subset \beta $입니다.</p>
+<h2 id="마치며"><a href="#마치며" class="headerlink" title="마치며"></a>마치며</h2><p>이 내용을 더 공부하고 싶다면 Walter Rudin의 Principle of Mathematical Analysis 1단원을 읽어보세요. 불친절하지만 많은 내용을 담고 있는 유명한 해석학 책입니다. 여기서 정의한 cut이 어떻게 실수가 되는지 더 자세하게 알 수 있을 거에요.</p>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/2019/03/24/실수-사이-유리수/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2018/11/20/카탈란-수/">
                             카탈란 수-대각선을 넘지 않는 경우의 수
                         </a>
@@ -787,7 +856,7 @@ B = \{ b \in V: \text{the shortest path from } b \text { to } v \text{ has even 
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="no post found" data-message-one="1 post found" data-message-other="{n} posts found">
-                12 posts found
+                13 posts found
             </p>
         </div>
     </div>
