@@ -8,8 +8,16 @@
     </url>
 
     <url>
-        <loc>https://3-24.github.io/2019/03/24/%EC%8B%A4%EC%88%98-%EC%82%AC%EC%9D%B4-%EC%9C%A0%EB%A6%AC%EC%88%98/</loc>
-        <lastmod>2019-03-24T11:04:35.420Z</lastmod>
+        <loc>https://3-24.github.io/2019/03/24/%EC%9C%A0%EB%A6%AC%EC%88%98%EC%9D%98-%EC%A1%B0%EB%B0%80%EC%84%B1/</loc>
+        <lastmod>2019-03-25T10:00:53.725Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/2019/03/25/blog-setup/</loc>
+        <lastmod>2019-03-25T09:53:36.198Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -58,14 +66,6 @@
     <url>
         <loc>https://3-24.github.io/2019/01/28/BOJ-submit-bot/</loc>
         <lastmod>2019-01-28T08:49:28.393Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>https://3-24.github.io/2019/01/17/blog-setup/</loc>
-        <lastmod>2019-01-27T10:49:45.029Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

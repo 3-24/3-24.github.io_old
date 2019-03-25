@@ -38,20 +38,6 @@
     </url>
 
     <url>
-        <loc>https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/</loc>
-        <lastmod>2019-01-27T10:49:45.029Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
-        <loc>https://3-24.github.io/tags/%EA%B0%9C%EB%B0%9C/</loc>
-        <lastmod>2019-01-28T08:49:28.393Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.2</priority>
-    </url>
-
-    <url>
         <loc>https://3-24.github.io/tags/%EB%B0%B1%EC%A4%80/</loc>
         <lastmod>2019-01-28T08:49:28.393Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -150,8 +136,22 @@
     </url>
 
     <url>
+        <loc>https://3-24.github.io/tags/%EB%B8%94%EB%A1%9C%EA%B7%B8/</loc>
+        <lastmod>2019-03-25T09:53:36.198Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/tags/%EA%B0%9C%EB%B0%9C/</loc>
+        <lastmod>2019-03-25T09:53:36.198Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>https://3-24.github.io/tags/%ED%95%B4%EC%84%9D%ED%95%99/</loc>
-        <lastmod>2019-03-24T11:04:35.420Z</lastmod>
+        <lastmod>2019-03-25T10:00:53.725Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
