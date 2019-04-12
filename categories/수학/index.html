@@ -236,6 +236,107 @@
             <div class="postShorten-header">
                 <h1 class="postShorten-title">
                     
+                        <a class="link-unstyled" href="/2019/04/12/order4-subgp/">
+                            크기 4인 군의 분류
+                        </a>
+                    
+                </h1>
+                <div class="postShorten-meta">
+    <time datetime="2019-04-12T23:20:17+09:00">
+	
+		    4월 12, 2019
+    	
+    </time>
+    
+        <span>in </span>
+        
+    <a class="category-link" href="/categories/수학/">수학</a>, <a class="category-link" href="/categories/수학/현대대수학/">현대대수학</a>
+
+
+    
+</div>
+
+            </div>
+            
+                <div class="postShorten-content">
+                    <p>모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다.</p>
+<h2 id="Order-4인-원소가-있는-경우"><a href="#Order-4인-원소가-있는-경우" class="headerlink" title="Order 4인 원소가 있는 경우"></a>Order 4인 원소가 있는 경우</h2><p>그 원소를 $x$로 놓았을 때 $| \langle x \rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$.</p>
+<h2 id="그렇지-않은-경우"><a href="#그렇지-않은-경우" class="headerlink" title="그렇지 않은 경우"></a>그렇지 않은 경우</h2><p>그렇다면 1을 제외한 모든 원소의 order가 2일 것이다(Order 1인 원소는 1밖에 없기 때문에 세 자리가 남으므로). 다시 말해, 대상 군을 $G$로 놓았을 때  $G = \{1,x,y,z\}$ 의 형태로, 서로 다른 $x,y,z$에 대해 $|x|=|y|=|z| = 2 $를 만족한다.</p>
+<p>남은 연산 관계를 채우기 위해서는 직접 경우를 제거해나가면 된다. $xy$에 집중하면,</p>
+<p>$xy=1$일 때 $y$는 $x$의 역원이 되기 때문에 $y=x$가 되므로 모순이다.</p>
+<p>$xy = x$일 때 양변의 왼쪽에 $x$를 곱하면 $x^2 = 1$이므로 $y = 1$이 된다. 모순</p>
+<p>$xy = y$도 마찬가지로 모순이다.</p>
+<p>따라서 $xy = z$인 경우만 남는다.</p>
+<p>이런 과정을 모두 반복하면 다음의 군표(group table)을 얻을 수 있다.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">$x$</th>
+<th style="text-align:center">$y$</th>
+<th style="text-align:center">$z$</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$x$</td>
+<td style="text-align:center">$y$</td>
+<td style="text-align:center">$z$</td>
+</tr>
+<tr>
+<td style="text-align:center">$x$</td>
+<td style="text-align:center">$x$</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$z$</td>
+<td style="text-align:center">$y$</td>
+</tr>
+<tr>
+<td style="text-align:center">$y$</td>
+<td style="text-align:center">$y$</td>
+<td style="text-align:center">$z$</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$z$</td>
+<td style="text-align:center">$z$</td>
+<td style="text-align:center">$x$</td>
+<td style="text-align:center">$y$</td>
+<td style="text-align:center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>이 연산은 닫혀있으면서 associative이고, 항등원이 잘 작동하고 역원이 언제나 존재하므로 $G$는 군이고, 사실 Klein 4 군과 동형이다.</p>
+
+                    
+                        
+
+                    
+                    
+                        <p>
+                            <a href="/2019/04/12/order4-subgp/#post-footer" class="postShorten-excerpt_link link">
+                                Comment and share
+                            </a>
+                        </p>
+                    
+                </div>
+            
+        </div>
+        
+    </article>
+    
+    
+    <article class="postShorten postShorten--thumbnailimg-bottom">
+        <div class="postShorten-wrap">
+            
+            <div class="postShorten-header">
+                <h1 class="postShorten-title">
+                    
                         <a class="link-unstyled" href="/2019/03/24/유리수의-조밀성/">
                             유리수의 조밀성
                         </a>
@@ -858,7 +959,7 @@ B = \{ b \in V: \text{the shortest path from } b \text { to } v \text{ has even 
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="no post found" data-message-one="1 post found" data-message-other="{n} posts found">
-                13 posts found
+                14 posts found
             </p>
         </div>
     </div>
