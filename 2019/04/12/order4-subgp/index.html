@@ -17,7 +17,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다.\nOrder 4인 원소가 있는 경우그 원소를 $x$로 놓았을 때 $| \\langle x \\rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$.\n그렇지 않은 경우그렇다면 1을 제외한 모든 원소의 order가 2일 것이다(Order 1인 원소는 1밖에 없기 때문에 세 자리가 남으므로). 다시 말해, 대상 군을 $G$로 놓았을 때  $G = \\{1,x,y,z\\}$ 의 형태로, 서로 다른 $x,y,z$에 대해 $|x|=|y|=|z| = 2 $를 만족한다.\n남은 연산 관계를 채우기 위해서는 직접 경우를 제거해나가면 된다. $xy$에 집중하면,\n$xy=1$일 때 $y$는 $x$의 역원이 되기 때문에 $y=x$가 되므로 모순이다.\n$xy = x$일 때 양변의 왼쪽에 $x$를 곱하면 $x^2 = 1$이므로 $y = 1$이 된다. 모순\n$xy = y$도 마찬가지로 모순이다.\n따라서 $xy = z$인 경우만 남는다.\n이런 과정을 모두 반복하면 다음의 군표(group table)을 얻을 수 있다.\n\n\n\n\n\n1\n$x$\n$y$\n$z$\n\n\n\n\n1\n1\n$x$\n$y$\n$z$\n\n\n$x$\n$x$\n1\n$z$\n$y$\n\n\n$y$\n$y$\n$z$\n1\n$x$\n\n\n$z$\n$z$\n$x$\n$y$\n1\n\n\n\n\n이 연산은 닫혀있으면서 associative이고, 항등원이 잘 작동하고 역원이 언제나 존재하므로 $G$는 군이고, 사실 Klein 4 군과 동형이다.\n","dateCreated":"2019-04-12T23:20:17+09:00","dateModified":"2019-04-12T23:38:29+09:00","datePublished":"2019-04-12T23:20:17+09:00","description":"","headline":"크기 4인 군의 분류","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/12/order4-subgp/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/12/order4-subgp/","keywords":"유한군"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다.\nOrder 4인 원소가 있는 경우그 원소를 $x$로 놓았을 때 $| \\langle x \\rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$.\n그렇지 않은 경우그렇다면 1을 제외한 모든 원소의 order가 2일 것이다(Order 1인 원소는 1밖에 없기 때문에 세 자리가 남으므로). 다시 말해, 대상 군을 $G$로 놓았을 때  $G = \\{1,x,y,z\\}$ 의 형태로, 서로 다른 $x,y,z$에 대해 $|x|=|y|=|z| = 2 $를 만족한다.\n남은 연산 관계를 채우기 위해서는 직접 경우를 제거해나가면 된다. $xy$에 집중하면,\n$xy=1$일 때 $y$는 $x$의 역원이 되기 때문에 $y=x$가 되므로 모순이다.\n$xy = x$일 때 양변의 왼쪽에 $x$를 곱하면 $x^2 = 1$이므로 $y = 1$이 된다. 모순\n$xy = y$도 마찬가지로 모순이다.\n따라서 $xy = z$인 경우만 남는다.\n이런 과정을 모두 반복하면 다음의 군표(group table)을 얻을 수 있다.\n\n\n\n\n\n1\n$x$\n$y$\n$z$\n\n\n\n\n1\n1\n$x$\n$y$\n$z$\n\n\n$x$\n$x$\n1\n$z$\n$y$\n\n\n$y$\n$y$\n$z$\n1\n$x$\n\n\n$z$\n$z$\n$y$\n$x$\n1\n\n\n\n\n이 연산은 닫혀있으면서 associative이고, 항등원이 잘 작동하고 역원이 언제나 존재하므로 $G$는 군이고, 사실 Klein 4 군과 동형이다.\n","dateCreated":"2019-04-12T23:20:17+09:00","dateModified":"2019-04-15T00:08:59+09:00","datePublished":"2019-04-12T23:20:17+09:00","description":"","headline":"크기 4인 군의 분류","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/12/order4-subgp/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/12/order4-subgp/","keywords":"유한군"}</script>
     <meta name="description" content="모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다. Order 4인 원소가 있는 경우그 원소를 $x$로 놓았을 때 $| \langle x \rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$. 그렇지 않은 경우그렇다면 1을 제외한 모든 원소">
 <meta name="keywords" content="유한군">
 <meta property="og:type" content="blog">
@@ -26,7 +26,7 @@
 <meta property="og:site_name" content="푹신푹신 후와후와">
 <meta property="og:description" content="모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다. Order 4인 원소가 있는 경우그 원소를 $x$로 놓았을 때 $| \langle x \rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$. 그렇지 않은 경우그렇다면 1을 제외한 모든 원소">
 <meta property="og:locale" content="ko">
-<meta property="og:updated_time" content="2019-04-12T14:38:29.593Z">
+<meta property="og:updated_time" content="2019-04-14T15:08:59.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="크기 4인 군의 분류">
 <meta name="twitter:description" content="모든 크기 4인 군은 순환군 $Z_4$나 Klein-4군 $V_4$와 동형(isomorphic)이다. Order 4인 원소가 있는 경우그 원소를 $x$로 놓았을 때 $| \langle x \rangle |$은 이미 크기가 4이기 때문에 $x$로만 생성되는 군이 이미 모든 공간을 채워버린다. 따라서 $Z_4$. 그렇지 않은 경우그렇다면 1을 제외한 모든 원소">
@@ -307,8 +307,8 @@
 <tr>
 <td style="text-align:center">$z$</td>
 <td style="text-align:center">$z$</td>
-<td style="text-align:center">$x$</td>
 <td style="text-align:center">$y$</td>
+<td style="text-align:center">$x$</td>
 <td style="text-align:center">1</td>
 </tr>
 </tbody>
@@ -335,7 +335,8 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/14/190414/" data-tooltip="190414" aria-label="PREVIOUS: 190414">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -430,7 +431,8 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    <a class="post-action-btn btn btn--disabled">
+                    
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/14/190414/" data-tooltip="190414" aria-label="PREVIOUS: 190414">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -650,7 +652,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://3-24.github.io/2019/01/11/Codeforces Round #531 (Div. 3) 후기/">
+                        <a class="link-unstyled" href="https://3-24.github.io/2019/01/11/CF-Round-531-DIv-3/">
                             <h3 class="media-heading">Codeforces Round #531 (Div. 3) 후기</h3>
                         </a>
                         <span class="media-meta">
@@ -669,7 +671,7 @@
                 <div class="media">
                     
                     <div class="media-body">
-                        <a class="link-unstyled" href="https://3-24.github.io/2019/01/11/CF-Round-531-DIv-3/">
+                        <a class="link-unstyled" href="https://3-24.github.io/2019/01/11/Codeforces Round #531 (Div. 3) 후기/">
                             <h3 class="media-heading">Codeforces Round #531 (Div. 3) 후기</h3>
                         </a>
                         <span class="media-meta">
@@ -784,7 +786,7 @@
         </div>
         <div class="modal-footer">
             <p class="results-count text-medium" data-message-zero="no post found" data-message-one="1 post found" data-message-other="{n} posts found">
-                14 posts found
+                15 posts found
             </p>
         </div>
     </div>
@@ -828,20 +830,5 @@
     </script>
 
 
-    <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-</body>
+    </body>
 </html>
