@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="푹신푹신 후와후와">
-    <title>Codeforces Round #532 (Div. 2) 후기 - 푹신푹신 후와후와</title>
+    <title>Oracle Padding Attack - 푹신푹신 후와후와</title>
     <meta name="author" content="Youngseok Choe">
     
         <meta name="keywords" content="mathematics,computer science,">
@@ -17,19 +17,22 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A\nb를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다.\n123456789101112131415161718192021222324252627#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    int n,k;    cin &gt;&gt; n &gt;&gt; k;    int Data[n]=&#123;0,&#125;, initSum = 0;    for (int i=0;i&lt;n;i++)&#123;        cin &gt;&gt; Data[i];        initSum += Data[i];    &#125;    int output = 0;    for (int b=0;b&lt;k;b++)&#123;        int sum = initSum, i=0;        while(b+i*k &lt;n)&#123;            sum -= Data[b+i*k];            i++;        &#125;        sum = abs(sum);        if (output &lt; sum) output = sum;    &#125;    cout &lt;&lt; output;    return 0;&#125;\n2. Build a Contesthttps://codeforces.com/contest/1100/problem/B\n문제를 잘못 이해해서 풀지 못한 문제입니다. 제가 구현했던 것은 모든 난이도의 문제가 모인 순간 앞에 있는 모든 문제를 고려 대상에서 제외하는 것인데, 오늘 제출 체크를 해보니까 그러면 안된다는 것을 확인할 수 있었어요. 다음은 이를 반영하여 수정한 코드입니다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;bits/stdc++.h&gt;using namespace std;int checkDiff[100001]=&#123;0,&#125;;// initialize checkDiffint initDiff(int x)&#123;    int count = 0;    for (int i=1;i&lt;=x;i++)&#123;        checkDiff[i] -= 1;        if (checkDiff[i] != 0) count++;    &#125;    return count;&#125;int main() &#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    int n,m; // number of difficulty levels, number of problems, &lt;= 100000    cin &gt;&gt; n &gt;&gt; m;    int diff; // new-designed difficulty    int count = 0;    for (int r=1;r&lt;=m;r++)&#123;        cin &gt;&gt; diff;        if (checkDiff[diff] == 0)&#123;            count++;        &#125;        checkDiff[diff]++;        // if all difficulty is ready        if (count == n)&#123;            count = initDiff(n);            cout &lt;&lt; 1;        &#125;        // if not ready        else cout &lt;&lt; 0;    &#125;    return 0;&#125;\n문제를 풀 때는 큰 수 배열 등에서 문제가 생길 것 같아 조심해서 짰는데, 너무 그 안에 갇혀있었다는 느낌이 들어요. 정작 문제는 다른 곳에서 나타났으니 말입니다.\n3. NN and Optical Illusion간단한 식 유도 문제입니다. 그림을 잘 그리면 빗변이 R+r, 높이가 R인 직각삼각형이 만들어지고 밑변과 빗변 사이의 각이 $ \\pi / n $이 됩니다. 따라서\n\n\\frac R {R+r} = \\sin \\frac {\\pi} n의 관계식을 R을 중심으로 풀어서 계산하면 됩니다. 저는 cout의 실수 자릿수출력이 6까지밖에 안되는 것을 이때 처음 알아서 헤맸습니다. \n12345678910111213141516#include &lt;bits/stdc++.h&gt;using namespace std;#define PI 3.14159265typedef long double ld;int main()&#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    cout &lt;&lt; setprecision(10);    int n,r;    cin &gt;&gt; n &gt;&gt; r;    ld calc = sin(PI/ld(n));    cout &lt;&lt; (ld(r)*calc) / (1-calc);    return 0;&#125;\n자릿수 출력은 10으로 넉넉하게~\n식을 내고 나서 Python으로 해결하려고 했는데 어떻게 짜는지 기억이 안나서 결국 c++로 해결했습니다. Python도 분명 일부 PS문제에서 강점이 있을 것 같은데 아쉽네요 ㅠ\n마무리2번에서 너무 오래 걸리고 감점도 받아서 레이팅 -26당했습니다. 분발해야겠네요!\n","dateCreated":"2019-01-14T13:08:49+09:00","dateModified":"2019-01-15T14:16:55+09:00","datePublished":"2019-01-14T13:08:49+09:00","description":"","headline":"Codeforces Round #532 (Div. 2) 후기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/","keywords":"문제해결, Codeforces"}</script>
-    <meta name="description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
-<meta name="keywords" content="문제해결,Codeforces">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.\n","dateCreated":"2019-04-15T17:47:05+09:00","dateModified":"2019-04-15T19:53:21+09:00","datePublished":"2019-04-15T17:47:05+09:00","description":"","headline":"Oracle Padding Attack","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/","keywords":"블록암호"}</script>
+    <meta name="description" content="환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.">
+<meta name="keywords" content="블록암호">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Codeforces Round #532 (Div. 2) 후기">
-<meta property="og:url" content="https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/index.html">
+<meta property="og:title" content="Oracle Padding Attack">
+<meta property="og:url" content="https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/index.html">
 <meta property="og:site_name" content="푹신푹신 후와후와">
-<meta property="og:description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
+<meta property="og:description" content="환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.">
 <meta property="og:locale" content="ko">
-<meta property="og:updated_time" content="2019-01-15T05:16:55.293Z">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB_decryption.svg/1920px-ECB_decryption.svg.png">
+<meta property="og:image" content="https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/opa01.png">
+<meta property="og:updated_time" content="2019-04-15T10:53:21.952Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codeforces Round #532 (Div. 2) 후기">
-<meta name="twitter:description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
+<meta name="twitter:title" content="Oracle Padding Attack">
+<meta name="twitter:description" content="환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB_decryption.svg/1920px-ECB_decryption.svg.png">
     
     
         
@@ -59,7 +62,7 @@
 
     
     <!--autocanonical-->
-    <link rel="canonical" href="https://3-24.github.io/2019/01/14/cf-round-532-div-2/">
+    <link rel="canonical" href="https://3-24.github.io/2019/04/15/oracle-padding-attack/">
 
 </head>
 
@@ -237,20 +240,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Codeforces Round #532 (Div. 2) 후기
+            Oracle Padding Attack
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-01-14T13:08:49+09:00">
+    <time datetime="2019-04-15T17:47:05+09:00">
 	
-		    1월 14, 2019
+		    4월 15, 2019
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/프로그래밍/">프로그래밍</a>, <a class="category-link" href="/categories/프로그래밍/Codeforces/">Codeforces</a>
+    <a class="category-link" href="/categories/정보보안/">정보보안</a>
 
 
     
@@ -262,20 +265,33 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="1-Roman-and-Browser"><a href="#1-Roman-and-Browser" class="headerlink" title="1. Roman and Browser"></a>1. Roman and Browser</h2><p><a href="https://codeforces.com/contest/1100/problem/A" rel="external nofollow noopener noreferrer" target="_blank">https://codeforces.com/contest/1100/problem/A</a></p>
-<p>b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">int</span> n,k;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">int</span> Data[n]=&#123;<span class="number">0</span>,&#125;, initSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; Data[i];</span><br><span class="line">        initSum += Data[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> output = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> b=<span class="number">0</span>;b&lt;k;b++)&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = initSum, i=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(b+i*k &lt;n)&#123;</span><br><span class="line">            sum -= Data[b+i*k];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = <span class="built_in">abs</span>(sum);</span><br><span class="line">        <span class="keyword">if</span> (output &lt; sum) output = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; output;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-Build-a-Contest"><a href="#2-Build-a-Contest" class="headerlink" title="2. Build a Contest"></a>2. Build a Contest</h2><p><a href="https://codeforces.com/contest/1100/problem/B" rel="external nofollow noopener noreferrer" target="_blank">https://codeforces.com/contest/1100/problem/B</a></p>
-<p>문제를 잘못 이해해서 풀지 못한 문제입니다. 제가 구현했던 것은 모든 난이도의 문제가 모인 순간 앞에 있는 모든 문제를 고려 대상에서 제외하는 것인데, 오늘 제출 체크를 해보니까 그러면 안된다는 것을 확인할 수 있었어요. 다음은 이를 반영하여 수정한 코드입니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> checkDiff[<span class="number">100001</span>]=&#123;<span class="number">0</span>,&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initialize checkDiff</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">initDiff</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=x;i++)&#123;</span><br><span class="line">        checkDiff[i] -= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (checkDiff[i] != <span class="number">0</span>) count++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">int</span> n,m; <span class="comment">// number of difficulty levels, number of problems, &lt;= 100000</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> diff; <span class="comment">// new-designed difficulty</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r=<span class="number">1</span>;r&lt;=m;r++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; diff;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (checkDiff[diff] == <span class="number">0</span>)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        checkDiff[diff]++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if all difficulty is ready</span></span><br><span class="line">        <span class="keyword">if</span> (count == n)&#123;</span><br><span class="line">            count = initDiff(n);</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if not ready</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>문제를 풀 때는 큰 수 배열 등에서 문제가 생길 것 같아 조심해서 짰는데, 너무 그 안에 갇혀있었다는 느낌이 들어요. 정작 문제는 다른 곳에서 나타났으니 말입니다.</p>
-<h2 id="3-NN-and-Optical-Illusion"><a href="#3-NN-and-Optical-Illusion" class="headerlink" title="3. NN and Optical Illusion"></a>3. NN and Optical Illusion</h2><p>간단한 식 유도 문제입니다. 그림을 잘 그리면 빗변이 R+r, 높이가 R인 직각삼각형이 만들어지고 밑변과 빗변 사이의 각이 $ \pi / n $이 됩니다. 따라서</p>
+            <h2 id="환경"><a href="#환경" class="headerlink" title="환경"></a>환경</h2><h3 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h3><p>이 글에서 집중할 부분은 CBC의 decryption 과정이다.</p>
+<div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB_decryption.svg/1920px-ECB_decryption.svg.png" ,="" align="center" "=""></div>
+
+<p>CBC 암호는 블록 단위로 암호화를 하는데, decryption 과정에서 다음의 XOR 연산을 수행한다:</p>
 <script type="math/tex; mode=display">
-\frac R {R+r} = \sin \frac {\pi} n</script><p>의 관계식을 R을 중심으로 풀어서 계산하면 됩니다. 저는 cout의 실수 자릿수출력이 6까지밖에 안되는 것을 이때 처음 알아서 헤맸습니다. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">double</span> ld;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setprecision(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">int</span> n,r;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; r;</span><br><span class="line"></span><br><span class="line">    ld calc = <span class="built_in">sin</span>(PI/ld(n));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; (ld(r)*calc) / (<span class="number">1</span>-calc);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>자릿수 출력은 10으로 넉넉하게~</p>
-<p>식을 내고 나서 Python으로 해결하려고 했는데 어떻게 짜는지 기억이 안나서 결국 c++로 해결했습니다. Python도 분명 일부 PS문제에서 강점이 있을 것 같은데 아쉽네요 ㅠ</p>
-<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p>2번에서 너무 오래 걸리고 감점도 받아서 레이팅 -26당했습니다. 분발해야겠네요!</p>
+P_i = D_k (C_i) \oplus C_{i-1} \\ C_0 = IV</script><p>즉 $i$번째 블록의 decryption은 $i$번째 블록을 풀어내는 복잡한 연산의 결과에 $C_{i-1}$을 XOR한다.</p>
+<h3 id="Decryption-Oracle"><a href="#Decryption-Oracle" class="headerlink" title="Decryption Oracle"></a>Decryption Oracle</h3><p>Oracle Padding Attack은 CBC 암호의 decryption oracle이 주어졌을 때 사용할 수 있는 공격 기법이다. Decryption oracle이란 내가 암호문을 보냈을 때 평문으로 바꿔주는 역할을 말하는 것으로, 대개 decryption oracle에 접근할 때는 관리자가 아닌 이상 암호문을 넣었을 때 평문을 출력받지 못하고 <strong>계산 가능 여부</strong>만 확인할 수 있다. 만약 정상적인 암호문을 넣었다면 정상적으로 작동하겠지만, 형식에 맞지 않은 암호문을 넣었을 때 error를 뱉어낸다.</p>
+<h2 id="패딩"><a href="#패딩" class="headerlink" title="패딩"></a>패딩</h2><p>블록 암호의 경우에는 블록 단위로 암호화를 시키기 때문에 블록 단위로 나누어지지 않을 경우가 발생한다. 따라서 남는 공간을 대충 채우는 과정이 필요하고, 다음의 규칙을 따른다:</p>
+<blockquote>
+<p>n바이트의 공간이 남으면 n으로 남은 n바이트를 모두 채워버린다.</p>
+</blockquote>
+<p>예를 들어 블록 암호가 16바이트씩 쪼개서 암호화를 시킨다고 하자. 만약에 암호화시킬 문장이 30바이트였다면, 16바이트로 한 블록을 만들고 남은 14바이트에 ‘0x02’, ‘0x02’를 붙여서 16바이트로 만들어서 블록을 저장한다.</p>
+<p>만약에 평문이 정확히 32바이트라도 16바이트 블록 두 개를 만든 후 혼돈을 막기 위해 ‘0x10’, 즉 16짜리 바이트 16개로 모두 채운 블록을 하나 더 만들어버린다. 그러면 마지막 블록은 ‘0x10101010101010101010101010101010’가 될 것이다.</p>
+<h2 id="Oracle-Padding-Attack"><a href="#Oracle-Padding-Attack" class="headerlink" title="Oracle Padding Attack"></a>Oracle Padding Attack</h2><p>CBC 암호 방식에서 decryption oracle이 주어져 있을 때 ‘패딩’이라는 문법에 집중하는 공격이다.</p>
+<p>먼저 타깃이 될 암호문이 주어지고, 공격자의 목적은 이 암호문의 평문이다. 편의상 16바이트 단위의 CBC이고 암호문은 32바이트라고 해보자. 이 때 나머지 바이트는 일정하게 유지한 채로 16번째 바이트를 바꿔가면서 입력을 넣는다. 다 해봤자 1바이트는 256가지 경우밖에 없으므로 순식간에 처리된다.</p>
+<img src="/2019/04/15/Oracle-Padding-Attack/opa01.png" title="opa">
+<p>대부분은 에러를 decryption oracle에서 전달받을 것이다. 그런데 딱 하나, decryption oracle에서 에러를 뱉지 않는 경우가 존재한다.</p>
+<p>이 때 바꿔서 입력한 바이트를 ‘0xb3’이라고 해보자. 그러면 이게 의미하는 것은 <strong>우연히 패딩이 틀리지 않았을 경우</strong>이다.</p>
+<script type="math/tex; mode=display">
+P_2' = D_k ( C_2) \oplus C_1'</script><p>즉, 입력한 바이트를 통해 연산한 결과가 ‘0x01’, 길이 1짜리 패딩이라는 뜻이다. 따라서 $D_k(C_2)$의 마지막 두 자리를 추정할 수 있다.</p>
+<script type="math/tex; mode=display">
+a \oplus b = c \implies a \oplus b \oplus b = c \oplus b \implies a = c \oplus b</script><p>그러니까 ‘0xb3’과 ‘0x01’을 xor한 ‘0xb2’가 $D_k (C_2)$의 마지막 두 자리이다.</p>
+<p>이런 방법을 앞의 자리에도 적용할 수 있다. 이번에는 ‘0x02’가 두 번 나오도록 유도해야 하기 때문에 16번째 바이트를 ‘0xb2’에 ‘0x02’를 xor해서 ‘0xb0’로 고정시키고, 15번째 바이트에 대해서 모든 경우를 실험해본다. 만약 에러가 나타나지 않으면, 그 바이트를 통해 또 $D_k (C_2)​$의 마지막에서 세번째, 네번째 자리를 찾아낼 수 있다.</p>
+<p>이 방법을 16번 실행해서 $D_k(C_2)$ 전체를 알아낼 수 있다. 이말은 즉 원래의</p>
+<script type="math/tex; mode=display">
+P_2 = D_k (C_2) \oplus C_1</script><p>을 계산할 수 있게 되었다는 것을 의미하고 plaintext를 추정할 수 있다.</p>
+<p>이 예시에서는 두 블록 짜리 암호문을 예로 들었는데, 블록이 많아도 문제가 되지 않는다. 뒷부분 블록은 앞의 decryption에 영향을 주지 않기 때문에 그냥 빼버리고 예시에서 했던 것처럼 마지막 블록을 반복해서 찾아내면 된다.</p>
 
             
 
@@ -286,7 +302,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/Codeforces/">Codeforces</a> <a class="tag tag--primary tag--small t-link" href="/tags/문제해결/">문제해결</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/블록암호/">블록암호</a>
 
             </div>
         
@@ -296,8 +312,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="PREVIOUS: equation-test">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -306,7 +321,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/11/Codeforces Round #531 (Div. 3) 후기/" data-tooltip="Codeforces Round #531 (Div. 3) 후기" aria-label="NEXT: Codeforces Round #531 (Div. 3) 후기">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/14/190414/" data-tooltip="190414" aria-label="NEXT: 190414">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -324,7 +339,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -332,7 +347,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -340,7 +355,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -392,8 +407,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="PREVIOUS: equation-test">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -402,7 +416,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/11/Codeforces Round #531 (Div. 3) 후기/" data-tooltip="Codeforces Round #531 (Div. 3) 후기" aria-label="NEXT: Codeforces Round #531 (Div. 3) 후기">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/14/190414/" data-tooltip="190414" aria-label="NEXT: 190414">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -420,7 +434,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -428,7 +442,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -436,7 +450,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" title="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -470,7 +484,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -478,7 +492,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -486,7 +500,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
@@ -766,9 +780,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/';
+                 this.page.url = 'https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/';
                  
-                    this.page.identifier = '2019/01/14/CF-Round-532-DIv-2/';
+                    this.page.identifier = '2019/04/15/Oracle-Padding-Attack/';
                  
              };
             (function() {
