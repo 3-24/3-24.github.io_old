@@ -17,7 +17,7 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.\n","dateCreated":"2019-04-15T17:47:05+09:00","dateModified":"2019-04-15T19:53:21+09:00","datePublished":"2019-04-15T17:47:05+09:00","description":"","headline":"Oracle Padding Attack","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/","keywords":"블록암호"}</script>
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"\n환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.\n","dateCreated":"2019-04-15T17:47:05+09:00","dateModified":"2019-04-15T19:56:00+09:00","datePublished":"2019-04-15T17:47:05+09:00","description":"","headline":"Oracle Padding Attack","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/","keywords":"블록암호"}</script>
     <meta name="description" content="환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.">
 <meta name="keywords" content="블록암호">
 <meta property="og:type" content="blog">
@@ -28,7 +28,7 @@
 <meta property="og:locale" content="ko">
 <meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB_decryption.svg/1920px-ECB_decryption.svg.png">
 <meta property="og:image" content="https://3-24.github.io/2019/04/15/Oracle-Padding-Attack/opa01.png">
-<meta property="og:updated_time" content="2019-04-15T10:53:21.952Z">
+<meta property="og:updated_time" content="2019-04-15T10:56:00.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Oracle Padding Attack">
 <meta name="twitter:description" content="환경CBC이 글에서 집중할 부분은 CBC의 decryption 과정이다.">
@@ -265,7 +265,8 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="환경"><a href="#환경" class="headerlink" title="환경"></a>환경</h2><h3 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h3><p>이 글에서 집중할 부분은 CBC의 decryption 과정이다.</p>
+            <h1 id="table-of-contents">Table of Contents</h1><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#환경"><span class="toc-text">환경</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CBC"><span class="toc-text">CBC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Decryption-Oracle"><span class="toc-text">Decryption Oracle</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#패딩"><span class="toc-text">패딩</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#공격-방법"><span class="toc-text">공격 방법</span></a></li></ol>
+<h2 id="환경"><a href="#환경" class="headerlink" title="환경"></a>환경</h2><h3 id="CBC"><a href="#CBC" class="headerlink" title="CBC"></a>CBC</h3><p>이 글에서 집중할 부분은 CBC의 decryption 과정이다.</p>
 <div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/ECB_decryption.svg/1920px-ECB_decryption.svg.png" ,="" align="center" "=""></div>
 
 <p>CBC 암호는 블록 단위로 암호화를 하는데, decryption 과정에서 다음의 XOR 연산을 수행한다:</p>
@@ -278,7 +279,7 @@ P_i = D_k (C_i) \oplus C_{i-1} \\ C_0 = IV</script><p>즉 $i$번째 블록의 de
 </blockquote>
 <p>예를 들어 블록 암호가 16바이트씩 쪼개서 암호화를 시킨다고 하자. 만약에 암호화시킬 문장이 30바이트였다면, 16바이트로 한 블록을 만들고 남은 14바이트에 ‘0x02’, ‘0x02’를 붙여서 16바이트로 만들어서 블록을 저장한다.</p>
 <p>만약에 평문이 정확히 32바이트라도 16바이트 블록 두 개를 만든 후 혼돈을 막기 위해 ‘0x10’, 즉 16짜리 바이트 16개로 모두 채운 블록을 하나 더 만들어버린다. 그러면 마지막 블록은 ‘0x10101010101010101010101010101010’가 될 것이다.</p>
-<h2 id="Oracle-Padding-Attack"><a href="#Oracle-Padding-Attack" class="headerlink" title="Oracle Padding Attack"></a>Oracle Padding Attack</h2><p>CBC 암호 방식에서 decryption oracle이 주어져 있을 때 ‘패딩’이라는 문법에 집중하는 공격이다.</p>
+<h2 id="공격-방법"><a href="#공격-방법" class="headerlink" title="공격 방법"></a>공격 방법</h2><p>CBC 암호 방식에서 decryption oracle이 주어져 있을 때 ‘패딩’이라는 문법에 집중하는 공격이다.</p>
 <p>먼저 타깃이 될 암호문이 주어지고, 공격자의 목적은 이 암호문의 평문이다. 편의상 16바이트 단위의 CBC이고 암호문은 32바이트라고 해보자. 이 때 나머지 바이트는 일정하게 유지한 채로 16번째 바이트를 바꿔가면서 입력을 넣는다. 다 해봤자 1바이트는 256가지 경우밖에 없으므로 순식간에 처리된다.</p>
 <img src="/2019/04/15/Oracle-Padding-Attack/opa01.png" title="opa">
 <p>대부분은 에러를 decryption oracle에서 전달받을 것이다. 그런데 딱 하나, decryption oracle에서 에러를 뱉지 않는 경우가 존재한다.</p>
@@ -371,7 +372,7 @@ P_2 = D_k (C_2) \oplus C_1</script><p>을 계산할 수 있게 되었다는 것�
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
@@ -466,7 +467,7 @@ P_2 = D_k (C_2) \oplus C_1</script><p>을 계산할 수 있게 되었다는 것�
         
         <li class="post-action">
             
-                <a class="post-action-btn btn btn--default" href="#" aria-label="Back to top">
+                <a class="post-action-btn btn btn--default" href="#table-of-contents" aria-label="Table of Contents">
             
                 <i class="fa fa-list" aria-hidden="true"></i>
             </a>
