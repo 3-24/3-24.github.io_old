@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://3-24.github.io/"/>
-  <updated>2019-04-15T10:56:00.360Z</updated>
+  <updated>2019-04-21T06:27:52.739Z</updated>
   <id>https://3-24.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RSA</title>
+    <link href="https://3-24.github.io/2019/04/19/RSA/"/>
+    <id>https://3-24.github.io/2019/04/19/RSA/</id>
+    <published>2019-04-19T06:58:00.000Z</published>
+    <updated>2019-04-21T06:27:52.739Z</updated>
+    
+    <content type="html"><![CDATA[<p>RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다.</p><h2 id="키-형성"><a href="#키-형성" class="headerlink" title="키 형성"></a>키 형성</h2><ul><li>두 소수 $p,q$를 골라서 $n=pq$로 놓는다.</li><li>$e$를 $\gcd ( \phi (n), e) = 1$이 되도록 뽑는다. $\phi$는 오일러 totient 함수이다.</li><li>$d = e^{-1}\text{ mod } \phi (n)$ 을 계산한다. modular inverse는 $e$의 선택에 의해 <strong>언제나 존재</strong>하고, 확장된 유클리도 호제법을 이용해서 아주 <strong>빠른 시간 안에 계산 가능</strong>하다.</li></ul><h2 id="암호화"><a href="#암호화" class="headerlink" title="암호화"></a>암호화</h2><p>평문 $m$을 암호화 하는 함수는 다음과 같다:</p><script type="math/tex; mode=display">E(m ) \equiv m^e \text{ mod }n</script><p>암호화 함수의 일대일 대응을 유지하기 위해 $m&lt;n$을 가정한다.</p><h2 id="복호화"><a href="#복호화" class="headerlink" title="복호화"></a>복호화</h2><p>암호문 $c$를 복호화 하는 함수는 다음과 같다:</p><script type="math/tex; mode=display">D(c) \equiv c^d \text{ mod } n</script><p>실제로 평문을 암호화했다가 복호화하면 복구 가능하다는 것을 보일 수 있다.</p><script type="math/tex; mode=display">\begin{aligned}D(E(m)) &\equiv E(m) ^d\text{ mod } n \\&\equiv m^{ed} \text{ mod } n\\&\equiv m ^{k \phi(n)+1} \text{ mod } n \\\end{aligned}</script><p>$\gcd(m,n)  = 1 $ 일 경우, 오일러의 toitient 정리에 의해 $m^{\phi(n)} \equiv 1 \text{ mod } n$이므로 $D(E(m)) \equiv m \text{ mod } n $이다.</p><p>$\gcd(m,n) \ne 1 $일 경우, $n = pq$이므로, $\gcd(m,n)$은 $p$ 또는 $q$이다. 일반성을 잃지 않고 $\gcd(m,n) = p$로 놓자.</p><p>일단 $m^{ed}\text{ mod } p \equiv 0 $이고, $m \text{ mod } p \equiv 0 $이므로 $m \equiv D(E(m)) \text{ mod } p $이다.</p><p>$(m,q) = 1$이므로 페르마의 소정리에 의해 $m^{q-1} \equiv 1 \text{ mod } q $이다. 따라서</p><script type="math/tex; mode=display">\begin{aligned}D(E(m)) \equiv m^{k\phi(pq) +1} \equiv m^{k(p-1)(q-1) +1} \equiv (m^{q-1})^{k(p-1)} m \equiv m \text{ mod } q\end{aligned}</script><p>이다. 따라서 중국인의 나머지 정리에 의해 $D(E(m)) \equiv m \text{ mod } n $이다.</p><h2 id="사용"><a href="#사용" class="headerlink" title="사용"></a>사용</h2><p>$n,e,c$는 공개되어도 상관 없지만, $n$의 소인수인 $p,q$와 복호화에서 사용하는 $d$는 절대 공개해서는 안되고, 추측으로 쉽게 풀릴 수 있는 형태가 되어서도 안된다. 보통 그래서 $p,q$를 아주 큰 소수로 잡으면서 공격에 대비한다.</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다.&lt;/p&gt;
+&lt;h2 id=
+      
+    
+    </summary>
+    
+      <category term="정보보안" scheme="https://3-24.github.io/categories/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88/"/>
+    
+      <category term="암호학" scheme="https://3-24.github.io/categories/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88/%EC%95%94%ED%98%B8%ED%95%99/"/>
+    
+    
+      <category term="RSA" scheme="https://3-24.github.io/tags/RSA/"/>
+    
+      <category term="암호" scheme="https://3-24.github.io/tags/%EC%95%94%ED%98%B8/"/>
+    
+  </entry>
   
   <entry>
     <title>Oracle Padding Attack</title>
@@ -324,9 +354,9 @@ d_{i,j} = \begin{case
       <category term="Codeforces" scheme="https://3-24.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/Codeforces/"/>
     
     
-      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
-    
       <category term="Codeforces" scheme="https://3-24.github.io/tags/Codeforces/"/>
+    
+      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
     
   </entry>
   
@@ -353,9 +383,9 @@ d_{i,j} = \begin{case
       <category term="Codeforces" scheme="https://3-24.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/Codeforces/"/>
     
     
-      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
-    
       <category term="Codeforces" scheme="https://3-24.github.io/tags/Codeforces/"/>
+    
+      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
     
   </entry>
   
@@ -382,9 +412,9 @@ d_{i,j} = \begin{case
       <category term="Codeforces" scheme="https://3-24.github.io/categories/%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D/Codeforces/"/>
     
     
-      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
-    
       <category term="Codeforces" scheme="https://3-24.github.io/tags/Codeforces/"/>
+    
+      <category term="문제해결" scheme="https://3-24.github.io/tags/%EB%AC%B8%EC%A0%9C%ED%95%B4%EA%B2%B0/"/>
     
   </entry>
   

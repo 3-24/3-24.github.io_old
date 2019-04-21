@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="푹신푹신 후와후와">
-    <title>Codeforces Round #532 (Div. 2) 후기 - 푹신푹신 후와후와</title>
+    <title>RSA - 푹신푹신 후와후와</title>
     <meta name="author" content="Youngseok Choe">
     
         <meta name="keywords" content="mathematics,computer science,">
@@ -17,19 +17,19 @@
     
         <link rel="alternate" type="application/atom+xml" title="RSS" href="/atom.xml">
     
-    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A\nb를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다.\n123456789101112131415161718192021222324252627#include &lt;bits/stdc++.h&gt;using namespace std;int main() &#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    int n,k;    cin &gt;&gt; n &gt;&gt; k;    int Data[n]=&#123;0,&#125;, initSum = 0;    for (int i=0;i&lt;n;i++)&#123;        cin &gt;&gt; Data[i];        initSum += Data[i];    &#125;    int output = 0;    for (int b=0;b&lt;k;b++)&#123;        int sum = initSum, i=0;        while(b+i*k &lt;n)&#123;            sum -= Data[b+i*k];            i++;        &#125;        sum = abs(sum);        if (output &lt; sum) output = sum;    &#125;    cout &lt;&lt; output;    return 0;&#125;\n2. Build a Contesthttps://codeforces.com/contest/1100/problem/B\n문제를 잘못 이해해서 풀지 못한 문제입니다. 제가 구현했던 것은 모든 난이도의 문제가 모인 순간 앞에 있는 모든 문제를 고려 대상에서 제외하는 것인데, 오늘 제출 체크를 해보니까 그러면 안된다는 것을 확인할 수 있었어요. 다음은 이를 반영하여 수정한 코드입니다.\n12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;bits/stdc++.h&gt;using namespace std;int checkDiff[100001]=&#123;0,&#125;;// initialize checkDiffint initDiff(int x)&#123;    int count = 0;    for (int i=1;i&lt;=x;i++)&#123;        checkDiff[i] -= 1;        if (checkDiff[i] != 0) count++;    &#125;    return count;&#125;int main() &#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    int n,m; // number of difficulty levels, number of problems, &lt;= 100000    cin &gt;&gt; n &gt;&gt; m;    int diff; // new-designed difficulty    int count = 0;    for (int r=1;r&lt;=m;r++)&#123;        cin &gt;&gt; diff;        if (checkDiff[diff] == 0)&#123;            count++;        &#125;        checkDiff[diff]++;        // if all difficulty is ready        if (count == n)&#123;            count = initDiff(n);            cout &lt;&lt; 1;        &#125;        // if not ready        else cout &lt;&lt; 0;    &#125;    return 0;&#125;\n문제를 풀 때는 큰 수 배열 등에서 문제가 생길 것 같아 조심해서 짰는데, 너무 그 안에 갇혀있었다는 느낌이 들어요. 정작 문제는 다른 곳에서 나타났으니 말입니다.\n3. NN and Optical Illusion간단한 식 유도 문제입니다. 그림을 잘 그리면 빗변이 R+r, 높이가 R인 직각삼각형이 만들어지고 밑변과 빗변 사이의 각이 $ \\pi / n $이 됩니다. 따라서\n\n\\frac R {R+r} = \\sin \\frac {\\pi} n의 관계식을 R을 중심으로 풀어서 계산하면 됩니다. 저는 cout의 실수 자릿수출력이 6까지밖에 안되는 것을 이때 처음 알아서 헤맸습니다. \n12345678910111213141516#include &lt;bits/stdc++.h&gt;using namespace std;#define PI 3.14159265typedef long double ld;int main()&#123;    ios_base::sync_with_stdio(false);    cin.tie(NULL);    cout &lt;&lt; setprecision(10);    int n,r;    cin &gt;&gt; n &gt;&gt; r;    ld calc = sin(PI/ld(n));    cout &lt;&lt; (ld(r)*calc) / (1-calc);    return 0;&#125;\n자릿수 출력은 10으로 넉넉하게~\n식을 내고 나서 Python으로 해결하려고 했는데 어떻게 짜는지 기억이 안나서 결국 c++로 해결했습니다. Python도 분명 일부 PS문제에서 강점이 있을 것 같은데 아쉽네요 ㅠ\n마무리2번에서 너무 오래 걸리고 감점도 받아서 레이팅 -26당했습니다. 분발해야겠네요!\n","dateCreated":"2019-01-14T13:08:49+09:00","dateModified":"2019-01-15T14:16:55+09:00","datePublished":"2019-01-14T13:08:49+09:00","description":"","headline":"Codeforces Round #532 (Div. 2) 후기","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/","keywords":"Codeforces, 문제해결"}</script>
-    <meta name="description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
-<meta name="keywords" content="Codeforces,문제해결">
+    <script type="application/ld+json">{"@context":"http://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg"},"articleBody":"RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다.\n키 형성\n두 소수 $p,q$를 골라서 $n=pq$로 놓는다.\n$e$를 $\\gcd ( \\phi (n), e) = 1$이 되도록 뽑는다. $\\phi$는 오일러 totient 함수이다.\n$d = e^{-1}\\text{ mod } \\phi (n)$ 을 계산한다. modular inverse는 $e$의 선택에 의해 언제나 존재하고, 확장된 유클리도 호제법을 이용해서 아주 빠른 시간 안에 계산 가능하다.\n\n암호화평문 $m$을 암호화 하는 함수는 다음과 같다:\n\nE(m ) \\equiv m^e \\text{ mod }n암호화 함수의 일대일 대응을 유지하기 위해 $m&lt;n$을 가정한다.\n복호화암호문 $c$를 복호화 하는 함수는 다음과 같다:\n\nD(c) \\equiv c^d \\text{ mod } n실제로 평문을 암호화했다가 복호화하면 복구 가능하다는 것을 보일 수 있다.\n\n\\begin{aligned}\nD(E(m)) &\\equiv E(m) ^d\\text{ mod } n \\\\\n&\\equiv m^{ed} \\text{ mod } n\\\\\n&\\equiv m ^{k \\phi(n)+1} \\text{ mod } n \\\\\n\\end{aligned}$\\gcd(m,n)  = 1 $ 일 경우, 오일러의 toitient 정리에 의해 $m^{\\phi(n)} \\equiv 1 \\text{ mod } n$이므로 $D(E(m)) \\equiv m \\text{ mod } n $이다.\n$\\gcd(m,n) \\ne 1 $일 경우, $n = pq$이므로, $\\gcd(m,n)$은 $p$ 또는 $q$이다. 일반성을 잃지 않고 $\\gcd(m,n) = p$로 놓자.\n일단 $m^{ed}\\text{ mod } p \\equiv 0 $이고, $m \\text{ mod } p \\equiv 0 $이므로 $m \\equiv D(E(m)) \\text{ mod } p $이다.\n$(m,q) = 1$이므로 페르마의 소정리에 의해 $m^{q-1} \\equiv 1 \\text{ mod } q $이다. 따라서\n\n\\begin{aligned}\nD(E(m)) \\equiv m^{k\\phi(pq) +1} \\equiv m^{k(p-1)(q-1) +1} \\equiv (m^{q-1})^{k(p-1)} m \\equiv m \\text{ mod } q\n\\end{aligned}이다. 따라서 중국인의 나머지 정리에 의해 $D(E(m)) \\equiv m \\text{ mod } n $이다.\n사용$n,e,c$는 공개되어도 상관 없지만, $n$의 소인수인 $p,q$와 복호화에서 사용하는 $d$는 절대 공개해서는 안되고, 추측으로 쉽게 풀릴 수 있는 형태가 되어서도 안된다. 보통 그래서 $p,q$를 아주 큰 소수로 잡으면서 공격에 대비한다.\n","dateCreated":"2019-04-19T15:58:00+09:00","dateModified":"2019-04-21T15:27:52+09:00","datePublished":"2019-04-19T15:58:00+09:00","description":"","headline":"RSA","image":[],"mainEntityOfPage":{"@type":"WebPage","@id":"https://3-24.github.io/2019/04/19/RSA/"},"publisher":{"@type":"Organization","name":"Youngseok Choe","sameAs":["https://github.com/3-24","http://stackoverflow.com/10366230","https://www.facebook.com/profile.php?id=100010703071923","mailto:yschoelife@gmail.com"],"image":"profile04.jpg","logo":{"@type":"ImageObject","url":"profile04.jpg"}},"url":"https://3-24.github.io/2019/04/19/RSA/","keywords":"RSA, 암호"}</script>
+    <meta name="description" content="RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다. 키 형성 두 소수 $p,q$를 골라서 $n=pq$로 놓는다. $e$를 $\gcd ( \phi (n), e) = 1$이 되도록 뽑는다.">
+<meta name="keywords" content="RSA,암호">
 <meta property="og:type" content="blog">
-<meta property="og:title" content="Codeforces Round #532 (Div. 2) 후기">
-<meta property="og:url" content="https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/index.html">
+<meta property="og:title" content="RSA">
+<meta property="og:url" content="https://3-24.github.io/2019/04/19/RSA/index.html">
 <meta property="og:site_name" content="푹신푹신 후와후와">
-<meta property="og:description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
+<meta property="og:description" content="RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다. 키 형성 두 소수 $p,q$를 골라서 $n=pq$로 놓는다. $e$를 $\gcd ( \phi (n), e) = 1$이 되도록 뽑는다.">
 <meta property="og:locale" content="ko">
-<meta property="og:updated_time" content="2019-01-15T05:16:55.293Z">
+<meta property="og:updated_time" content="2019-04-21T06:27:52.739Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Codeforces Round #532 (Div. 2) 후기">
-<meta name="twitter:description" content="1. Roman and Browserhttps://codeforces.com/contest/1100/problem/A b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다. 1234567891011121314151">
+<meta name="twitter:title" content="RSA">
+<meta name="twitter:description" content="RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다. 키 형성 두 소수 $p,q$를 골라서 $n=pq$로 놓는다. $e$를 $\gcd ( \phi (n), e) = 1$이 되도록 뽑는다.">
     
     
         
@@ -59,7 +59,7 @@
 
     
     <!--autocanonical-->
-    <link rel="canonical" href="https://3-24.github.io/2019/01/14/cf-round-532-div-2/">
+    <link rel="canonical" href="https://3-24.github.io/2019/04/19/rsa/">
 
 </head>
 
@@ -237,20 +237,20 @@
         <div class="post-header main-content-wrap text-left">
     
         <h1 class="post-title">
-            Codeforces Round #532 (Div. 2) 후기
+            RSA
         </h1>
     
     
         <div class="post-meta">
-    <time datetime="2019-01-14T13:08:49+09:00">
+    <time datetime="2019-04-19T15:58:00+09:00">
 	
-		    1월 14, 2019
+		    4월 19, 2019
     	
     </time>
     
         <span>in </span>
         
-    <a class="category-link" href="/categories/프로그래밍/">프로그래밍</a>, <a class="category-link" href="/categories/프로그래밍/Codeforces/">Codeforces</a>
+    <a class="category-link" href="/categories/정보보안/">정보보안</a>, <a class="category-link" href="/categories/정보보안/암호학/">암호학</a>
 
 
     
@@ -262,20 +262,32 @@
     
     <div class="post-content markdown">
         <div class="main-content-wrap">
-            <h2 id="1-Roman-and-Browser"><a href="#1-Roman-and-Browser" class="headerlink" title="1. Roman and Browser"></a>1. Roman and Browser</h2><p><a href="https://codeforces.com/contest/1100/problem/A" rel="external nofollow noopener noreferrer" target="_blank">https://codeforces.com/contest/1100/problem/A</a></p>
-<p>b를 0부터 k-1까지 바꿔가면서 비교를 통해 최대 절대값을 찾아내면 됩니다. 직접 b+ik만 제외하면서 더하는 것이 쉽지 않기 때문에 전체 합을 구해놓고 b+ik의 원소를 빼는 형태로 구현했습니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">int</span> n,k;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">int</span> Data[n]=&#123;<span class="number">0</span>,&#125;, initSum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;n;i++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; Data[i];</span><br><span class="line">        initSum += Data[i];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> output = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> b=<span class="number">0</span>;b&lt;k;b++)&#123;</span><br><span class="line">        <span class="keyword">int</span> sum = initSum, i=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(b+i*k &lt;n)&#123;</span><br><span class="line">            sum -= Data[b+i*k];</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">        sum = <span class="built_in">abs</span>(sum);</span><br><span class="line">        <span class="keyword">if</span> (output &lt; sum) output = sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; output;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="2-Build-a-Contest"><a href="#2-Build-a-Contest" class="headerlink" title="2. Build a Contest"></a>2. Build a Contest</h2><p><a href="https://codeforces.com/contest/1100/problem/B" rel="external nofollow noopener noreferrer" target="_blank">https://codeforces.com/contest/1100/problem/B</a></p>
-<p>문제를 잘못 이해해서 풀지 못한 문제입니다. 제가 구현했던 것은 모든 난이도의 문제가 모인 순간 앞에 있는 모든 문제를 고려 대상에서 제외하는 것인데, 오늘 제출 체크를 해보니까 그러면 안된다는 것을 확인할 수 있었어요. 다음은 이를 반영하여 수정한 코드입니다.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> checkDiff[<span class="number">100001</span>]=&#123;<span class="number">0</span>,&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// initialize checkDiff</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">initDiff</span><span class="params">(<span class="keyword">int</span> x)</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=x;i++)&#123;</span><br><span class="line">        checkDiff[i] -= <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">if</span> (checkDiff[i] != <span class="number">0</span>) count++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> count;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="keyword">int</span> n,m; <span class="comment">// number of difficulty levels, number of problems, &lt;= 100000</span></span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">int</span> diff; <span class="comment">// new-designed difficulty</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> r=<span class="number">1</span>;r&lt;=m;r++)&#123;</span><br><span class="line">        <span class="built_in">cin</span> &gt;&gt; diff;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (checkDiff[diff] == <span class="number">0</span>)&#123;</span><br><span class="line">            count++;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        checkDiff[diff]++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if all difficulty is ready</span></span><br><span class="line">        <span class="keyword">if</span> (count == n)&#123;</span><br><span class="line">            count = initDiff(n);</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// if not ready</span></span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">cout</span> &lt;&lt; <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>문제를 풀 때는 큰 수 배열 등에서 문제가 생길 것 같아 조심해서 짰는데, 너무 그 안에 갇혀있었다는 느낌이 들어요. 정작 문제는 다른 곳에서 나타났으니 말입니다.</p>
-<h2 id="3-NN-and-Optical-Illusion"><a href="#3-NN-and-Optical-Illusion" class="headerlink" title="3. NN and Optical Illusion"></a>3. NN and Optical Illusion</h2><p>간단한 식 유도 문제입니다. 그림을 잘 그리면 빗변이 R+r, 높이가 R인 직각삼각형이 만들어지고 밑변과 빗변 사이의 각이 $ \pi / n $이 됩니다. 따라서</p>
+            <p>RSA는 어떤 수의 소인수분해는 아주 어렵지만, 반대로 소인수를 곱해서 원래 수를 만드는 것은 쉽다는 성질을 이용한 암호 체계이다. 암호명은 이 암호를 개발한 세 암호학자 Rivest-Shamir-Adelman에서 유래한다.</p>
+<h2 id="키-형성"><a href="#키-형성" class="headerlink" title="키 형성"></a>키 형성</h2><ul>
+<li>두 소수 $p,q$를 골라서 $n=pq$로 놓는다.</li>
+<li>$e$를 $\gcd ( \phi (n), e) = 1$이 되도록 뽑는다. $\phi$는 오일러 totient 함수이다.</li>
+<li>$d = e^{-1}\text{ mod } \phi (n)$ 을 계산한다. modular inverse는 $e$의 선택에 의해 <strong>언제나 존재</strong>하고, 확장된 유클리도 호제법을 이용해서 아주 <strong>빠른 시간 안에 계산 가능</strong>하다.</li>
+</ul>
+<h2 id="암호화"><a href="#암호화" class="headerlink" title="암호화"></a>암호화</h2><p>평문 $m$을 암호화 하는 함수는 다음과 같다:</p>
 <script type="math/tex; mode=display">
-\frac R {R+r} = \sin \frac {\pi} n</script><p>의 관계식을 R을 중심으로 풀어서 계산하면 됩니다. 저는 cout의 실수 자릿수출력이 6까지밖에 안되는 것을 이때 처음 알아서 헤맸습니다. </p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PI 3.14159265</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">double</span> ld;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="literal">false</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="literal">NULL</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; setprecision(<span class="number">10</span>);</span><br><span class="line">    <span class="keyword">int</span> n,r;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; r;</span><br><span class="line"></span><br><span class="line">    ld calc = <span class="built_in">sin</span>(PI/ld(n));</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; (ld(r)*calc) / (<span class="number">1</span>-calc);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>자릿수 출력은 10으로 넉넉하게~</p>
-<p>식을 내고 나서 Python으로 해결하려고 했는데 어떻게 짜는지 기억이 안나서 결국 c++로 해결했습니다. Python도 분명 일부 PS문제에서 강점이 있을 것 같은데 아쉽네요 ㅠ</p>
-<h2 id="마무리"><a href="#마무리" class="headerlink" title="마무리"></a>마무리</h2><p>2번에서 너무 오래 걸리고 감점도 받아서 레이팅 -26당했습니다. 분발해야겠네요!</p>
+E(m ) \equiv m^e \text{ mod }n</script><p>암호화 함수의 일대일 대응을 유지하기 위해 $m&lt;n$을 가정한다.</p>
+<h2 id="복호화"><a href="#복호화" class="headerlink" title="복호화"></a>복호화</h2><p>암호문 $c$를 복호화 하는 함수는 다음과 같다:</p>
+<script type="math/tex; mode=display">
+D(c) \equiv c^d \text{ mod } n</script><p>실제로 평문을 암호화했다가 복호화하면 복구 가능하다는 것을 보일 수 있다.</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D(E(m)) &\equiv E(m) ^d\text{ mod } n \\
+&\equiv m^{ed} \text{ mod } n\\
+&\equiv m ^{k \phi(n)+1} \text{ mod } n \\
+\end{aligned}</script><p>$\gcd(m,n)  = 1 $ 일 경우, 오일러의 toitient 정리에 의해 $m^{\phi(n)} \equiv 1 \text{ mod } n$이므로 $D(E(m)) \equiv m \text{ mod } n $이다.</p>
+<p>$\gcd(m,n) \ne 1 $일 경우, $n = pq$이므로, $\gcd(m,n)$은 $p$ 또는 $q$이다. 일반성을 잃지 않고 $\gcd(m,n) = p$로 놓자.</p>
+<p>일단 $m^{ed}\text{ mod } p \equiv 0 $이고, $m \text{ mod } p \equiv 0 $이므로 $m \equiv D(E(m)) \text{ mod } p $이다.</p>
+<p>$(m,q) = 1$이므로 페르마의 소정리에 의해 $m^{q-1} \equiv 1 \text{ mod } q $이다. 따라서</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D(E(m)) \equiv m^{k\phi(pq) +1} \equiv m^{k(p-1)(q-1) +1} \equiv (m^{q-1})^{k(p-1)} m \equiv m \text{ mod } q
+\end{aligned}</script><p>이다. 따라서 중국인의 나머지 정리에 의해 $D(E(m)) \equiv m \text{ mod } n $이다.</p>
+<h2 id="사용"><a href="#사용" class="headerlink" title="사용"></a>사용</h2><p>$n,e,c$는 공개되어도 상관 없지만, $n$의 소인수인 $p,q$와 복호화에서 사용하는 $d$는 절대 공개해서는 안되고, 추측으로 쉽게 풀릴 수 있는 형태가 되어서도 안된다. 보통 그래서 $p,q$를 아주 큰 소수로 잡으면서 공격에 대비한다.</p>
 
             
 
@@ -286,7 +298,7 @@
             <div class="post-footer-tags">
                 <span class="text-color-light text-small">TAGGED IN</span><br>
                 
-    <a class="tag tag--primary tag--small t-link" href="/tags/Codeforces/">Codeforces</a> <a class="tag tag--primary tag--small t-link" href="/tags/문제해결/">문제해결</a>
+    <a class="tag tag--primary tag--small t-link" href="/tags/RSA/">RSA</a> <a class="tag tag--primary tag--small t-link" href="/tags/암호/">암호</a>
 
             </div>
         
@@ -296,8 +308,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="PREVIOUS: equation-test">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -306,7 +317,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/11/Codeforces Round #531 (Div. 3) 후기/" data-tooltip="Codeforces Round #531 (Div. 3) 후기" aria-label="NEXT: Codeforces Round #531 (Div. 3) 후기">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/15/Oracle-Padding-Attack/" data-tooltip="Oracle Padding Attack" aria-label="NEXT: Oracle Padding Attack">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -324,7 +335,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/19/RSA/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -332,7 +343,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/19/RSA/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -340,7 +351,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/19/RSA/" title="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -392,8 +403,7 @@
         <ul class="post-actions post-action-nav">
             <li class="post-action">
                 
-                    
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/14/equation-test/" data-tooltip="equation-test" aria-label="PREVIOUS: equation-test">
+                    <a class="post-action-btn btn btn--disabled">
                 
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                     <span class="hide-xs hide-sm text-small icon-ml">PREVIOUS</span>
@@ -402,7 +412,7 @@
             <li class="post-action">
                 
                     
-                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/01/11/Codeforces Round #531 (Div. 3) 후기/" data-tooltip="Codeforces Round #531 (Div. 3) 후기" aria-label="NEXT: Codeforces Round #531 (Div. 3) 후기">
+                    <a class="post-action-btn btn btn--default tooltip--top" href="/2019/04/15/Oracle-Padding-Attack/" data-tooltip="Oracle Padding Attack" aria-label="NEXT: Oracle Padding Attack">
                 
                     <span class="hide-xs hide-sm text-small icon-mr">NEXT</span>
                     <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -420,7 +430,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/19/RSA/" title="Share on Facebook" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-facebook" aria-hidden="true"></i>
                 </a>
             </li>
@@ -428,7 +438,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/19/RSA/" title="Share on Twitter" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-twitter" aria-hidden="true"></i>
                 </a>
             </li>
@@ -436,7 +446,7 @@
             
             
             <li class="post-action hide-xs">
-                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" title="Share on Google+" rel="external nofollow noopener noreferrer">
+                <a class="post-action-btn btn btn--default" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/19/RSA/" title="Share on Google+" rel="external nofollow noopener noreferrer">
                     <i class="fab fa-google-plus" aria-hidden="true"></i>
                 </a>
             </li>
@@ -470,7 +480,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https://3-24.github.io/2019/04/19/RSA/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-facebook" aria-hidden="true"></i><span>Share on Facebook</span>
                     </a>
                 </li>
@@ -478,7 +488,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://twitter.com/intent/tweet?text=https://3-24.github.io/2019/04/19/RSA/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-twitter" aria-hidden="true"></i><span>Share on Twitter</span>
                     </a>
                 </li>
@@ -486,7 +496,7 @@
                 
                 
                 <li class="share-option">
-                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/" rel="external nofollow noopener noreferrer">
+                    <a class="share-option-btn" target="_blank" href="https://plus.google.com/share?url=https://3-24.github.io/2019/04/19/RSA/" rel="external nofollow noopener noreferrer">
                         <i class="fab fa-google-plus" aria-hidden="true"></i><span>Share on Google+</span>
                     </a>
                 </li>
@@ -766,9 +776,9 @@
     
         <script>
              var disqus_config = function () {
-                 this.page.url = 'https://3-24.github.io/2019/01/14/CF-Round-532-DIv-2/';
+                 this.page.url = 'https://3-24.github.io/2019/04/19/RSA/';
                  
-                    this.page.identifier = '2019/01/14/CF-Round-532-DIv-2/';
+                    this.page.identifier = '2019/04/19/RSA/';
                  
              };
             (function() {

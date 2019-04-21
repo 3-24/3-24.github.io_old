@@ -86,7 +86,14 @@
 
     <url>
         <loc>https://3-24.github.io/categories/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88/</loc>
-        <lastmod>2019-04-15T10:56:00.360Z</lastmod>
+        <lastmod>2019-04-21T06:27:52.739Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>https://3-24.github.io/categories/%EC%A0%95%EB%B3%B4%EB%B3%B4%EC%95%88/%EC%95%94%ED%98%B8%ED%95%99/</loc>
+        <lastmod>2019-04-21T06:27:52.739Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.2</priority>
     </url>
